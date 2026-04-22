@@ -102,6 +102,27 @@ function renderThesis() {
         <div class="tl-stack">${t.topics.map(x => `<span>${x}</span>`).join("")}</div>
       </div>
     </div>
+    ${t.myContributions ? `
+    <div class="thesis-contributions">
+      <div class="tl-block-label">My contributions</div>
+      <ul class="tl-bullets">
+        ${t.myContributions.map(b => `<li>${b}</li>`).join("")}
+      </ul>
+    </div>` : ""}
+    ${t.members ? `
+    <div class="thesis-members">
+      <div class="tl-block-label">Team members</div>
+      <div class="thesis-teams">
+        <div class="thesis-team">
+          <div class="thesis-team-label">Software</div>
+          <ul>${t.members.software.map(m => `<li>${m}</li>`).join("")}</ul>
+        </div>
+        <div class="thesis-team">
+          <div class="thesis-team-label">Hardware</div>
+          <ul>${t.members.hardware.map(m => `<li>${m}</li>`).join("")}</ul>
+        </div>
+      </div>
+    </div>` : ""}
   `;
 }
 

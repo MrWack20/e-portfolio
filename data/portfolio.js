@@ -38,14 +38,25 @@ window.PORTFOLIO = {
     },
   ],
 
-  // ---------- THESIS (placeholder — fill in later) ----------
+  // ---------- THESIS ----------
   thesis: {
-    title: "Thesis title — coming soon",
+    title: "Design and Development of an Intelligent Robotic Assistant for Campus Information Management",
     period: "2025 — 2026",
     advisors: "To be filled",
-    blurb: "A short description of my undergraduate thesis will go here. The full abstract, methodology, results, and paper download will be added as the project progresses.",
-    topics: ["Placeholder topic 1", "Placeholder topic 2", "Placeholder topic 3"],
-    status: "In Progress",
+    status: "Completed",
+    blurb: "Commissioned by the Dean of the Computer Studies and Engineering Department at Jose Rizal University, this thesis merged two groups into a single robotic system capable of answering campus inquiries through natural conversation and autonomous navigation. The robot accepts spoken queries and responds via a Retrieval-Augmented Generation (RAG) pipeline — drawing grounded answers from an uploaded knowledge base through a multi-LLM architecture. An emotion detection module analyzes the user's facial expression and tailors responses accordingly, while an expressive LCD avatar displays dynamic facial animations to make interactions feel lifelike. Navigation combines LiDAR, ultrasonic, and infrared IR sensors; movement logic runs on an ESP32 connected via USB to a Raspberry Pi 5. A web-based admin panel enables remote startup, knowledge-base management, and hardware health monitoring. Built with sustainable and recyclable materials in alignment with the UN SDGs, and powered by a 4-cell lead-acid battery for extended operation.",
+    topics: ["Retrieval-Augmented Generation", "Multi-LLM Architecture", "Emotion Detection", "LiDAR-assisted Navigation"],
+    members: {
+      software: ["Rizelle B. Bautista", "Joaquin Alec P. Hao", "Juan Carlos N. Bertos", "Fiona Yvonne D.C. Canas"],
+      hardware: ["Mhar Christian U. Bongolan", "Francis Andrew R. Seballos", "Christopher John A. Gravoso", "Johann Maier T. Cuisia", "Gary James A. Gambol"],
+    },
+    myContributions: [
+      "Finance management — handled budget and component procurement for both teams",
+      "Emotion detection model: dataset gathering, cleaning, and model training",
+      "Cross-team coordination: system integration and end-to-end testing between software and hardware",
+      "LiDAR-centered navigation research — tested SLAM on Raspberry Pi, pivoted to ESP32 hardcoded navigation due to component incompatibilities",
+      "Software paper documentation management and documents oversight across both teams",
+    ],
   },
 
   experience: [
@@ -271,19 +282,19 @@ window.PORTFOLIO = {
   // Any public, direct-URL MP3 works. If `src` is null, the track shows as locked (placeholder).
   music: [
     {
-      title: "Lifelight",
-      game: "Super Smash Bros. Ultimate",
-      src: null, // add your own file path here, e.g. "assets/music/lifelight.mp3"
+      title: "You Say Run OST",
+      game: "My Hero Academia",
+      src: assets/music/My_Hero_Academia_OST-You_Say_Run.mp3, // add your own file path here, e.g. "assets/music/lifelight.mp3"
     },
     {
-      title: "Snowdin Town",
-      game: "Undertale",
-      src: null,
+      title: "Azalea Town Theme",
+      game: "Pokemon Heat Gold & Soul Silver",
+      src:  assets/music/Azalea_Town_Pokémon_HGSS,
     },
     {
-      title: "Megalovania",
-      game: "Undertale",
-      src: null,
+      title: "Route 10 Theme",
+      game: "Pokemon Black and White",
+      src:  assets/music/Pokemon_BlackWhite_Route_10,
     },
     {
       title: "Your favorite track",

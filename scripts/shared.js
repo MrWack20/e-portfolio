@@ -179,6 +179,13 @@ function renderMusicPlayer() {
           </div>
         </div>
       </div>
+      <div class="ost-volume">
+        <svg class="ost-vol-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path class="ost-vol-wave" d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+        <input class="ost-vol-slider" data-ost-vol type="range" min="0" max="1" step="0.02" value="1" aria-label="Volume" />
+      </div>
       <div class="ost-list" data-ost-list>
         ${p.music.map((t, i) => `
           <button class="ost-item ${t.src ? '' : 'locked'}" data-ost-idx="${i}">
@@ -264,6 +271,17 @@ function renderMusicPlayer() {
     const r = bar.getBoundingClientRect();
     const pct = (e.clientX - r.left) / r.width;
     if (audio.duration) audio.currentTime = audio.duration * pct;
+  });
+
+  const volSlider = wrap.querySelector("[data-ost-vol]");
+  const savedVol = parseFloat(localStorage.getItem("ost.vol") ?? "1");
+  audio.volume = isFinite(savedVol) ? Math.max(0, Math.min(1, savedVol)) : 1;
+  volSlider.value = audio.volume;
+  volSlider.style.setProperty("--vol-pct", (audio.volume * 100) + "%");
+  volSlider.addEventListener("input", () => {
+    audio.volume = parseFloat(volSlider.value);
+    localStorage.setItem("ost.vol", volSlider.value);
+    volSlider.style.setProperty("--vol-pct", (parseFloat(volSlider.value) * 100) + "%");
   });
 
   // Toggle open/close

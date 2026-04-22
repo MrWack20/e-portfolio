@@ -265,7 +265,58 @@
 .thesis-blurb { color: var(--ink-soft); font-size: 14px; line-height: 1.6; max-width: 700px; margin-bottom: 24px; }
 .thesis-detail { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; padding-top: 20px; border-top: 1px solid var(--line-soft); }
 .thesis-advisors { color: var(--ink-soft); font-size: 14px; }
-@media (max-width: 720px) { .thesis-detail { grid-template-columns: 1fr; gap: 20px; } .thesis-card { padding: 24px 22px; } }
+
+.thesis-contributions {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+}
+.thesis-members {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+}
+.thesis-teams {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 12px;
+}
+.thesis-team-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.thesis-team ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.thesis-team ul li {
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding-left: 14px;
+  position: relative;
+}
+.thesis-team ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 10px;
+  top: 2px;
+}
+@media (max-width: 720px) {
+  .thesis-detail { grid-template-columns: 1fr; gap: 20px; }
+  .thesis-card { padding: 24px 22px; }
+  .thesis-teams { grid-template-columns: 1fr; }
+}
 
 /* HARDWARE */
 .hw-section { margin-top: 88px; }
