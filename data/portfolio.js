@@ -16,8 +16,8 @@ window.PORTFOLIO = {
   resume: "assets/Hao_Joaquin_Resume.pdf",
 
   socials: [
-    { label: "LinkedIn", href: "#", handle: "linkedin.com/in/joaquinhao" },
-    { label: "GitHub",   href: "#", handle: "github.com/joaquinhao" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/joaquin-alec-hao-1a9861320/", handle: "linkedin.com/in/joaquin-alec-hao" },
+    { label: "GitHub",   href: "https://github.com/MrWack20", handle: "github.com/MrWack20" },
     { label: "Email",    href: "mailto:joaquinhao@gmail.com", handle: "joaquinhao@gmail.com" },
   ],
 
