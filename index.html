@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Joaquin Hao — Computer Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/home.css?v=2">
+<link rel="stylesheet" href="styles/ost.css">
+</head>
+<body>
+<div class="backdrop" id="backdrop"></div>
+<nav class="nav" id="nav"></nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-meta eyebrow reveal">
+      <span>Portfolio · v1</span>
+      <span class="dot">●</span>
+      <span>Antipolo, Philippines</span>
+      <span class="dot">●</span>
+      <span id="clock">—</span>
+    </div>
+
+    <h1 class="hero-title display reveal">
+      The engineer
+      <span class="hero-ital"><em>who does it all.</em></span>
+    </h1>
+
+    <div class="hero-sub reveal">
+      <p>Computer Engineering student at Jose Rizal University with a hands-on appetite for data, systems, and things that plug in. I move comfortably between a SQL console, an Android Studio project, and a breadboard — and I ship.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="projects.html">See my work <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="assets/Hao_Joaquin_Resume.pdf" download>Download résumé</a>
+      </div>
+    </div>
+
+    <div class="hero-card reveal">
+      <div class="hero-card-inner">
+        <div class="hero-portrait">
+          <img src="assets/portrait.jpg" alt="Portrait of Joaquin Hao" />
+          <div class="hero-portrait-tag mono">
+            <span>● AVAILABLE</span>
+            <span>for internships, collabs</span>
+          </div>
+        </div>
+        <div class="hero-id">
+          <div class="hero-id-row"><span class="eyebrow">Name</span><span>Joaquin Alec P. Hao</span></div>
+          <div class="hero-id-row"><span class="eyebrow">Studying</span><span>B.S. Computer Engineering</span></div>
+          <div class="hero-id-row"><span class="eyebrow">At</span><span>Jose Rizal University</span></div>
+          <div class="hero-id-row"><span class="eyebrow">Stack</span><span>SQL · React · Java · Firebase · AWS</span></div>
+          <div class="hero-id-row"><span class="eyebrow">Status</span><span class="status-live"><i></i> Building daily</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="stats-bar wrap">
+    <div class="stats-grid" id="stats"></div>
+  </section>
+
+  <!-- SELECTED WORK (horizontal cards, 2 featured) -->
+  <section class="selected wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">— Selected work</div>
+      <h2 class="section-title display">A few things <em>I'm proud of.</em></h2>
+      <a class="section-link" href="projects.html">All projects <span class="arrow">→</span></a>
+    </div>
+    <div class="selected-list" id="selected-list"></div>
+  </section>
+
+  <!-- CURRENT FOCUS / WHAT I'M DOING NOW -->
+  <section class="focus wrap">
+    <div class="focus-grid">
+      <div class="focus-col reveal">
+        <div class="eyebrow">— Currently</div>
+        <h3 class="focus-head display">What I'm focused on.</h3>
+      </div>
+      <div class="focus-list reveal">
+        <div class="focus-item">
+          <div class="focus-year mono">2026</div>
+          <div>
+            <div class="focus-title">NetSuite admin internship @ IT Group Inc.</div>
+            <div class="focus-desc">Administering users, writing SuiteQL, authoring ISMS governance docs across 7 enterprise systems.</div>
+          </div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-year mono">2026</div>
+          <div>
+            <div class="focus-title">Computer Engineering coursework</div>
+            <div class="focus-desc">Deepening into embedded systems, circuit design, and robotics — the analog side of software.</div>
+          </div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-year mono">Ongoing</div>
+          <div>
+            <div class="focus-title">AWS Learning Clubs — JRU</div>
+            <div class="focus-desc">Running finances + docs as co-founding Secretariat; hosting cloud workshops on campus.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE / TECH TAPE -->
+  <section class="marquee">
+    <div class="marquee-track">
+      <span>SQL</span><span>·</span><span>Firebase</span><span>·</span><span>Java</span><span>·</span><span>ReactJS</span><span>·</span><span>Python</span><span>·</span><span>AWS</span><span>·</span><span>NetSuite</span><span>·</span><span>MySQL</span><span>·</span><span>PostgreSQL</span><span>·</span><span>Android Studio</span><span>·</span><span>PHP</span><span>·</span><span>IoT</span><span>·</span><span>Robotics</span><span>·</span>
+      <span>SQL</span><span>·</span><span>Firebase</span><span>·</span><span>Java</span><span>·</span><span>ReactJS</span><span>·</span><span>Python</span><span>·</span><span>AWS</span><span>·</span><span>NetSuite</span><span>·</span><span>MySQL</span><span>·</span><span>PostgreSQL</span><span>·</span><span>Android Studio</span><span>·</span><span>PHP</span><span>·</span><span>IoT</span><span>·</span><span>Robotics</span><span>·</span>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="closing wrap reveal">
+    <div class="closing-card">
+      <div>
+        <div class="eyebrow">— Next steps</div>
+        <h3 class="closing-title display">Got a project, internship, or just want to talk tech?</h3>
+      </div>
+      <a class="btn btn-primary" href="contact.html">Get in touch <span class="arrow">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="data/portfolio.js"></script>
+<script src="scripts/shared.js"></script>
+<script src="scripts/home.js"></script>
+</body>
+</html>

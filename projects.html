@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projects — Joaquin Hao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/projects.css">
+<link rel="stylesheet" href="styles/ost.css">
+</head>
+<body>
+<div class="backdrop" id="backdrop"></div>
+<nav class="nav" id="nav"></nav>
+
+<main>
+  <!-- HEADER -->
+  <section class="proj-header wrap">
+    <div class="eyebrow reveal">— Projects · 2024 → present</div>
+    <h1 class="proj-head-title display reveal">
+      Built, broken, shipped. <em>A timeline.</em>
+    </h1>
+    <p class="proj-head-sub reveal">From thesis libraries to card collection apps, each project taught me something new. Scroll through chronologically — newest first.</p>
+    <div class="proj-filters reveal" id="filters"></div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline wrap">
+    <div class="timeline-spine"></div>
+    <div id="timeline-list"></div>
+  </section>
+
+  <!-- THESIS -->
+  <section class="thesis-section wrap" id="thesis">
+    <div class="section-head reveal">
+      <div class="eyebrow">— Undergraduate Thesis</div>
+      <h2 class="section-title display">The capstone.</h2>
+    </div>
+    <div class="thesis-card reveal" id="thesis-card"></div>
+  </section>
+
+  <!-- HARDWARE / ROBOTICS -->
+  <section class="hw-section wrap" id="hardware">
+    <div class="section-head reveal">
+      <div class="eyebrow">— Hardware & Robotics</div>
+      <h2 class="section-title display">Things that plug in.</h2>
+    </div>
+    <div class="hw-grid reveal" id="hw-grid"></div>
+    <p class="hw-note reveal">These projects are in the process of being documented. Check back soon for circuit diagrams, code, and build photos.</p>
+  </section>
+</main>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="data/portfolio.js"></script>
+<script src="scripts/shared.js"></script>
+<script src="scripts/projects.js"></script>
+</body>
+</html>

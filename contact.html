@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact — Joaquin Hao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/contact.css">
+<link rel="stylesheet" href="styles/ost.css">
+</head>
+<body>
+<div class="backdrop" id="backdrop"></div>
+<nav class="nav" id="nav"></nav>
+
+<main>
+  <section class="contact wrap">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="eyebrow reveal">— Contact</div>
+        <h1 class="contact-title display reveal">
+          Let's make something <em>together.</em>
+        </h1>
+        <p class="contact-lede reveal">Internship offers, collabs, questions, random hellos — I answer everything. Drop a line below, or reach out directly.</p>
+
+        <div class="contact-info reveal" id="contact-info"></div>
+
+        <div class="contact-resume reveal">
+          <div class="resume-card">
+            <div>
+              <div class="eyebrow">— Résumé</div>
+              <div class="resume-title">Hao_Joaquin_Resume.pdf</div>
+              <div class="resume-meta">Updated April 2026</div>
+            </div>
+            <a class="btn btn-primary" href="assets/Hao_Joaquin_Resume.pdf" download>
+              Download <span class="arrow">↓</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right reveal">
+        <form class="contact-form" id="contact-form" onsubmit="return submitForm(event)">
+          <div class="form-head">
+            <div class="form-dots">
+              <i></i><i></i><i></i>
+            </div>
+            <span class="mono">new-message.txt</span>
+          </div>
+
+          <div class="form-field">
+            <label>Your name</label>
+            <input type="text" name="name" required placeholder="Jane Doe" />
+          </div>
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" name="email" required placeholder="jane@company.com" />
+          </div>
+          <div class="form-field">
+            <label>What's this about?</label>
+            <div class="form-chips">
+              <label><input type="radio" name="topic" value="Internship" checked /><span>Internship</span></label>
+              <label><input type="radio" name="topic" value="Collab" /><span>Collaboration</span></label>
+              <label><input type="radio" name="topic" value="Hire" /><span>Freelance / Hire</span></label>
+              <label><input type="radio" name="topic" value="Say hi" /><span>Say hi 👋</span></label>
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Message</label>
+            <textarea name="message" required rows="5" placeholder="Tell me what's on your mind..."></textarea>
+          </div>
+          <button class="btn btn-primary form-submit" type="submit">
+            Send message <span class="arrow">→</span>
+          </button>
+          <div class="form-success" id="form-success">
+            <div class="check">✓</div>
+            <div>
+              <strong>Message queued.</strong><br />
+              <span>I'll get back to you within 48 hours. Meanwhile, your default mail client should open with your message pre-filled.</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="data/portfolio.js"></script>
+<script src="scripts/shared.js"></script>
+<script src="scripts/contact.js"></script>
+</body>
+</html>

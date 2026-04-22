@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About — Joaquin Hao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/about.css?v=2">
+<link rel="stylesheet" href="styles/ost.css">
+</head>
+<body>
+<div class="backdrop" id="backdrop"></div>
+<nav class="nav" id="nav"></nav>
+
+<main>
+  <!-- INTRO -->
+  <section class="about-intro wrap">
+    <div class="eyebrow reveal">— About</div>
+    <h1 class="about-title display reveal">
+      Hi, I'm Joaquin. <em>Nice to meet you.</em>
+    </h1>
+    <div class="about-lede reveal" id="about-lede"></div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="about-section wrap" id="experience">
+    <div class="section-split">
+      <div class="section-sticky reveal">
+        <div class="eyebrow">— 02 / Experience</div>
+        <h2 class="section-h display">Where <em>I've worked.</em></h2>
+      </div>
+      <div class="exp-list" id="exp-list"></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="about-section wrap" id="skills">
+    <div class="section-split">
+      <div class="section-sticky reveal">
+        <div class="eyebrow">— 03 / Skills</div>
+        <h2 class="section-h display">What <em>I work with.</em></h2>
+      </div>
+      <div class="skills-wrap" id="skills-wrap"></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION + CERTS -->
+  <section class="about-section wrap" id="education">
+    <div class="section-split">
+      <div class="section-sticky reveal">
+        <div class="eyebrow">— 04 / Education & Certs</div>
+        <h2 class="section-h display">The paper trail.</h2>
+      </div>
+      <div>
+        <div class="edu-block" id="edu-block"></div>
+        <div class="certs-block" id="certs-block"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section class="about-section wrap" id="interests">
+    <div class="section-split">
+      <div class="section-sticky reveal">
+        <div class="eyebrow">— 05 / Off-hours</div>
+        <h2 class="section-h display">When I'm <em>not at the keyboard.</em></h2>
+      </div>
+      <div class="interests-wrap reveal" id="interests-wrap"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="data/portfolio.js"></script>
+<script src="scripts/shared.js"></script>
+<script src="scripts/about.js"></script>
+</body>
+</html>

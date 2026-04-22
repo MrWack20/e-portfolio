@@ -1,0 +1,274 @@
+/* ============================================================
+   OST MUSIC PLAYER — global floating dock
+   ============================================================ */
+
+.ost {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  font-family: var(--font-mono);
+  color: var(--ink);
+  --ost-w: 340px;
+}
+
+/* Collapsed pill tab */
+.ost-tab {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all 0.3s var(--ease-out);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.ost-tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 8px 32px var(--accent-glow);
+  transform: translateY(-2px);
+}
+.ost-tab-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.ost-tab-eq i {
+  display: block;
+  width: 2px;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 1px;
+  animation: ost-eq 1s ease-in-out infinite;
+  opacity: 0.5;
+}
+.ost-tab-eq i:nth-child(1) { animation-delay: 0.0s; }
+.ost-tab-eq i:nth-child(2) { animation-delay: 0.15s; }
+.ost-tab-eq i:nth-child(3) { animation-delay: 0.3s; }
+.ost-tab-eq i:nth-child(4) { animation-delay: 0.45s; }
+@keyframes ost-eq {
+  0%, 100% { transform: scaleY(0.3); }
+  50%      { transform: scaleY(1.0); }
+}
+.ost:not(.playing) .ost-tab-eq i {
+  animation-play-state: paused;
+  transform: scaleY(0.4);
+  opacity: 0.35;
+}
+
+/* Panel */
+.ost-panel {
+  width: var(--ost-w);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 18px 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.02);
+  transition: opacity 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.ost-panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), transparent);
+  opacity: 0.8;
+}
+
+.ost.collapsed .ost-panel {
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  pointer-events: none;
+  visibility: hidden;
+}
+.ost.collapsed .ost-tab { opacity: 1; }
+.ost:not(.collapsed) .ost-tab { opacity: 0; pointer-events: none; }
+
+.ost-head { margin-bottom: 14px; }
+.ost-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.ost-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ost-close {
+  width: 22px; height: 22px;
+  border: none;
+  background: transparent;
+  color: var(--ink-mute);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.ost-close:hover { color: var(--ink); background: var(--bg-inset); }
+
+.ost-track-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+.ost-track-game {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-mute);
+}
+
+/* Controls */
+.ost-controls {
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.ost-btn {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg-inset);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+.ost-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.ost-play {
+  width: 40px; height: 40px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+.ost-play:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: scale(1.06);
+}
+
+.ost-seek {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 6px;
+}
+.ost-seek-bar {
+  height: 4px;
+  background: var(--bg-inset);
+  border: 1px solid var(--line-soft);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.ost-seek-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+.ost-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--ink-mute);
+  letter-spacing: 0.08em;
+}
+
+/* Track list */
+.ost-list {
+  display: grid;
+  gap: 2px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 8px 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: 10px;
+}
+.ost-list::-webkit-scrollbar { width: 4px; }
+.ost-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+.ost-item {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  text-align: left;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ost-item:hover { background: var(--bg-inset); color: var(--ink); }
+.ost-item.active { background: color-mix(in oklab, var(--accent) 14%, transparent); color: var(--ink); }
+.ost-item.locked { opacity: 0.55; cursor: not-allowed; }
+.ost-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ink-mute);
+  transition: all 0.25s;
+}
+.ost-item.active .ost-dot { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+.ost-item-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.ost-item-title {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ost-item-game {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+}
+
+.ost-fine {
+  font-size: 10px;
+  color: var(--ink-mute);
+  line-height: 1.4;
+}
+.ost-fine code {
+  font-family: var(--font-mono);
+  background: var(--bg-inset);
+  border: 1px solid var(--line-soft);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 9.5px;
+  color: var(--accent-2);
+}
+
+@media (max-width: 500px) {
+  .ost { right: 12px; bottom: 12px; --ost-w: calc(100vw - 24px); }
+}
