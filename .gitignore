@@ -3,6 +3,5 @@ Thumbs.db
 *.log
 node_modules/
 .env
-assets/music/
 
 .vercel

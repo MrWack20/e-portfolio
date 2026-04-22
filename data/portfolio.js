@@ -282,24 +282,19 @@ window.PORTFOLIO = {
   // Any public, direct-URL MP3 works. If `src` is null, the track shows as locked (placeholder).
   music: [
     {
-      title: "You Say Run OST",
-      game: "My Hero Academia",
-      src: assets/music/My_Hero_Academia_OST-You_Say_Run.mp3, // add your own file path here, e.g. "assets/music/lifelight.mp3"
+      title: "You Say Run",
+      game: "My Hero Academia OST",
+      src: "assets/music/My_Hero_Academia_OST-You_Say_Run.mp3",
     },
     {
       title: "Azalea Town Theme",
-      game: "Pokemon Heat Gold & Soul Silver",
-      src:  assets/music/Azalea_Town_Pokémon_HGSS,
+      game: "Pokémon HeartGold & SoulSilver",
+      src: "assets/music/Azalea_Town_Pokémon_HGSS.mp3",
     },
     {
       title: "Route 10 Theme",
-      game: "Pokemon Black and White",
-      src:  assets/music/Pokemon_BlackWhite_Route_10,
-    },
-    {
-      title: "Your favorite track",
-      game: "Add your game",
-      src: null,
+      game: "Pokémon Black & White",
+      src: "assets/music/Pokemon_BlackWhite_Route_10.mp3",
     },
   ],
 };
