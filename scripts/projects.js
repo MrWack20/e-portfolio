@@ -126,6 +126,16 @@ function renderThesis() {
     <h3 class="thesis-title">${t.title}</h3>
     <p class="thesis-blurb">${t.blurb}</p>
 
+    ${t.teamPhoto ? `
+    <div class="thesis-photo-wrap">
+      <img class="thesis-team-photo"
+           src="${t.teamPhoto}"
+           alt="Thesis team with the robot"
+           loading="lazy"
+           decoding="async" />
+      <div class="thesis-photo-caption">The full team — Software & Hardware</div>
+    </div>` : ""}
+
     ${t.videos && t.videos.length ? `
     <div class="thesis-videos">
       <div class="tl-block-label" style="margin-bottom:14px;">— ${t.videos.length === 1 ? t.videos[0].label : "Demo Videos"}</div>

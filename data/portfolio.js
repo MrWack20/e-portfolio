@@ -57,6 +57,7 @@ window.PORTFOLIO = {
       "LiDAR-centered navigation research — tested SLAM on Raspberry Pi, pivoted to ESP32 hardcoded navigation due to component incompatibilities",
       "Software paper documentation management and documents oversight across both teams",
     ],
+    teamPhoto: "assets/img/thesis-team.jpg",
     videos: [
       { label: "Thesis Defense Presentation", id: "hE_q9dPcMeE" },
     ],

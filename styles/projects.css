@@ -442,6 +442,35 @@
   margin-bottom: 10px;
 }
 
+/* --- Thesis team photo --- */
+.thesis-photo-wrap {
+  margin: 24px 0 28px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  position: relative;
+}
+.thesis-team-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s var(--ease-out);
+}
+.thesis-photo-wrap:hover .thesis-team-photo {
+  transform: scale(1.02);
+}
+.thesis-photo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 12px 18px;
+  background: linear-gradient(to top, rgba(5,7,13,0.85), transparent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
 /* --- Thesis videos: 2-col grid inside the card --- */
 .thesis-videos {
   margin: 28px 0 24px;
