@@ -90,9 +90,20 @@ function renderEdu() {
 function renderCerts() {
   const el = document.getElementById("certs-block");
   el.innerHTML = PORTFOLIO.certifications.map(c => `
-    <div class="cert-card reveal">
-      <div class="cert-name">${c.name}</div>
-      <div class="cert-meta">${c.issuer} · ${c.year}</div>
+    <div class="cert-card reveal ${c.badge ? 'has-badge' : ''}">
+      ${c.badge ? `
+      <div class="cert-badge-wrap">
+        <img class="cert-badge"
+             src="${c.badge}"
+             alt="${c.name} badge"
+             loading="lazy"
+             decoding="async"
+             onerror="this.closest('.cert-badge-wrap').classList.add('badge-missing')" />
+      </div>` : ""}
+      <div class="cert-info">
+        <div class="cert-name">${c.name}</div>
+        <div class="cert-meta">${c.issuer} · ${c.year}</div>
+      </div>
     </div>
   `).join("");
 }

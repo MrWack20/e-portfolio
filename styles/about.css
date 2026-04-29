@@ -206,31 +206,64 @@
   font-size: 13px;
 }
 
-.certs-block { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.certs-block { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+
 .cert-card {
-  padding: 18px 22px;
+  padding: 16px 18px;
   background: var(--bg-elev);
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  transition: transform 0.3s var(--ease-out), border-color 0.3s;
+  transition: transform 0.3s var(--ease-out), border-color 0.3s, box-shadow 0.3s;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
-.cert-card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 4px 20px var(--accent-glow); }
+.cert-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+/* Cyan top-edge glow on hover */
 .cert-card::before {
-  content: "✓";
+  content: "";
   position: absolute;
-  top: 12px; right: 14px;
-  width: 20px; height: 20px;
-  border-radius: 4px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: 12px;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cert-card:hover::before { opacity: 1; }
+
+/* Badge image */
+.cert-badge-wrap {
+  flex-shrink: 0;
+  width: 60px; height: 60px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--bg-inset);
+  border: 1px solid var(--line-soft);
   display: grid;
   place-items: center;
-  font-weight: bold;
+  transition: border-color 0.3s;
 }
-.cert-name { font-weight: 500; margin-bottom: 4px; font-size: 14px; padding-right: 24px; }
+.cert-card:hover .cert-badge-wrap { border-color: var(--accent); }
+.cert-badge {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+/* When badge image fails to load — shrink the wrapper so it doesn't leave a gap */
+.cert-badge-wrap.badge-missing {
+  width: 0; height: 0;
+  border: none;
+  overflow: hidden;
+}
+
+/* Text content */
+.cert-info { min-width: 0; flex: 1; }
+.cert-name { font-weight: 500; margin-bottom: 5px; font-size: 13px; line-height: 1.35; }
 .cert-meta {
   font-family: var(--font-mono);
   font-size: 10px;
