@@ -190,12 +190,22 @@ function renderHardware() {
   const el = document.getElementById("hw-grid");
   if (!el) return;
   el.innerHTML = PORTFOLIO.hardwareProjects.map(h => `
-    <div class="hw-card">
-      <div class="hw-badge">${h.status}</div>
-      <div class="hw-meta">${h.period}</div>
-      <h3 class="hw-title">${h.title}</h3>
-      <p class="hw-blurb">${h.blurb}</p>
-      ${h.stack && h.stack.length ? `<div class="tl-stack">${h.stack.map(s => `<span>${s}</span>`).join("")}</div>` : ""}
+    <div class="hw-card ${h.image ? 'has-img' : ''}">
+      ${h.image ? `
+      <div class="hw-img-wrap">
+        <img src="${h.image}"
+             alt="${h.title}"
+             loading="lazy"
+             decoding="async"
+             onerror="this.closest('.hw-img-wrap').style.display='none'" />
+      </div>` : ""}
+      <div class="hw-card-body">
+        <div class="hw-badge">${h.status}</div>
+        <div class="hw-meta">${h.period}</div>
+        <h3 class="hw-title">${h.title}</h3>
+        <p class="hw-blurb">${h.blurb}</p>
+        ${h.stack && h.stack.length ? `<div class="tl-stack">${h.stack.map(s => `<span>${s}</span>`).join("")}</div>` : ""}
+      </div>
     </div>
   `).join("");
 }

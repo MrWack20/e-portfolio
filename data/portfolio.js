@@ -202,6 +202,8 @@ window.PORTFOLIO = {
   ],
 
   // ---------- HARDWARE / ROBOTICS PROJECTS ----------
+  // To add a photo: drop the image into assets/img/ using the filename in each `image` field below.
+  // Supported formats: .jpg, .jpeg, .png, .webp
   hardwareProjects: [
     {
       slug: "solar-tracker",
@@ -210,6 +212,7 @@ window.PORTFOLIO = {
       blurb: "Details coming soon.",
       stack: [],
       status: "Coming Soon",
+      image: "assets/img/hw-solar-tracker.jpg",
     },
     {
       slug: "fire-fighting-robot",
@@ -218,6 +221,7 @@ window.PORTFOLIO = {
       blurb: "Details coming soon.",
       stack: [],
       status: "Coming Soon",
+      image: "assets/img/hw-fire-fighting-robot.jpg",
     },
     {
       slug: "sumobot",
@@ -226,6 +230,7 @@ window.PORTFOLIO = {
       blurb: "Details coming soon.",
       stack: ["ESP32"],
       status: "Coming Soon",
+      image: "assets/img/hw-sumobot.jpg",
     },
     {
       slug: "led-cube",
@@ -234,6 +239,7 @@ window.PORTFOLIO = {
       blurb: "Details coming soon.",
       stack: [],
       status: "Coming Soon",
+      image: "assets/img/hw-led-cube.jpg",
     },
     {
       slug: "power-supply",
@@ -242,6 +248,7 @@ window.PORTFOLIO = {
       blurb: "Details coming soon.",
       stack: [],
       status: "Coming Soon",
+      image: "assets/img/hw-power-supply.jpg",
     },
     {
       slug: "bugbot",
@@ -250,6 +257,7 @@ window.PORTFOLIO = {
       blurb: "Details coming soon.",
       stack: ["Arduino", "C++"],
       status: "Coming Soon",
+      image: "assets/img/hw-bugbot.jpg",
     },
   ],
 
