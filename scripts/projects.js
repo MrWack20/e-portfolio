@@ -109,21 +109,20 @@ function renderTimeline() {
               <div class="tl-stack">
                 ${p.stack.map(s => `<span>${s}</span>`).join("")}
               </div>
+              ${p.demo ? `
+              <div class="tl-demo">
+                <a class="pokeball-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
+                  <div class="pokeball">
+                    <div class="pokeball-top"></div>
+                    <div class="pokeball-bottom"></div>
+                    <div class="pokeball-band"></div>
+                    <div class="pokeball-btn-circle"></div>
+                  </div>
+                  <span class="pokeball-label">Click the Pokéball to visit the website</span>
+                </a>
+              </div>` : ""}
             </div>
           </div>
-
-          ${p.demo ? `
-          <div class="tl-demo">
-            <a class="pokeball-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
-              <div class="pokeball">
-                <div class="pokeball-top"></div>
-                <div class="pokeball-bottom"></div>
-                <div class="pokeball-band"></div>
-                <div class="pokeball-btn-circle"></div>
-              </div>
-              <span class="pokeball-label">Open Live Demo ↗</span>
-            </a>
-          </div>` : ""}
 
         </div>
 
