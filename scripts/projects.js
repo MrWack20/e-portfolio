@@ -58,6 +58,18 @@ function renderTimeline() {
             </div>
           </div>
         </div>
+        ${p.video ? `
+        <div class="tl-video">
+          <div class="tl-block-label">Demo</div>
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/${p.video}?rel=0&modestbranding=1"
+              title="${p.title} demo"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        </div>` : ""}
       </div>
     </article>
   `).join("");
@@ -121,6 +133,25 @@ function renderThesis() {
           <div class="thesis-team-label">Hardware</div>
           <ul>${t.members.hardware.map(m => `<li>${m}</li>`).join("")}</ul>
         </div>
+      </div>
+    </div>` : ""}
+    ${t.videos && t.videos.length ? `
+    <div class="thesis-videos">
+      <div class="tl-block-label">Demo Videos</div>
+      <div class="video-grid">
+        ${t.videos.map(v => `
+          <div class="video-item">
+            <div class="video-label">${v.label}</div>
+            <div class="video-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1"
+                title="${v.label}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        `).join("")}
       </div>
     </div>` : ""}
   `;

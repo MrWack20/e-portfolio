@@ -343,3 +343,50 @@
 .hw-blurb { color: var(--ink-soft); font-size: 13px; line-height: 1.5; margin-bottom: 16px; }
 .hw-note { margin-top: 16px; color: var(--ink-mute); font-size: 12px; font-family: var(--font-mono); }
 @media (max-width: 640px) { .hw-grid { grid-template-columns: 1fr; } }
+
+/* VIDEO EMBEDS */
+.thesis-videos {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-soft);
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 14px;
+}
+.video-item {}
+.video-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 8px;
+}
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--bg-inset);
+  box-shadow: 0 0 24px color-mix(in oklab, var(--accent) 8%, transparent);
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+.tl-video {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+  max-width: 640px;
+}
+@media (max-width: 720px) {
+  .video-grid { grid-template-columns: 1fr; }
+}

@@ -57,6 +57,10 @@ window.PORTFOLIO = {
       "LiDAR-centered navigation research — tested SLAM on Raspberry Pi, pivoted to ESP32 hardcoded navigation due to component incompatibilities",
       "Software paper documentation management and documents oversight across both teams",
     ],
+    videos: [
+      { label: "System Demo", id: "nJzlzAAUDlA" },
+      { label: "Thesis Presentation", id: "hE_q9dPcMeE" },
+    ],
   },
 
   experience: [
@@ -164,6 +168,7 @@ window.PORTFOLIO = {
         "Built core backend: auth, data storage, and application pipeline.",
         "Contributed to frontend and UI/UX decisions.",
       ],
+      video: null, // add YouTube video ID here when ready, e.g. "dQw4w9WgXcQ"
     },
     {
       slug: "inventory-system",
