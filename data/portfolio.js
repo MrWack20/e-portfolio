@@ -302,7 +302,7 @@ window.PORTFOLIO = {
   certifications: [
     { name: "AWS Certified Cloud Practitioner",        issuer: "Amazon Web Services", year: "2025", badge: "assets/img/cert-aws-ccp.png" },
     { name: "AWS Cloud Quest: Cloud Practitioner",     issuer: "Amazon Web Services", year: "2025", badge: "assets/img/cert-aws-cloud-quest.png" },
-    { name: "DataCamp Certified Data Engineer Associate", issuer: "DataCamp",         year: "2025", badge: "assets/img/cert-datacamp.png" },
+    { name: "DataCamp Certified Data Engineer Associate", issuer: "DataCamp",         year: "2025", badge: "assets/img/cert-datacamp-dataengassoc.png" },
     { name: "CompTIA ITF+",                            issuer: "CompTIA",             year: "2024", badge: "assets/img/cert-comptia-itf.png" },
   ],
 

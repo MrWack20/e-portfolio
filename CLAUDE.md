@@ -27,7 +27,7 @@ Hosted on Vercel via GitHub auto-deploy. No build step — Vercel serves files d
 │   ├── shared.js       # Nav, footer, theme toggle, backdrop, reveal, counters, OST player
 │   ├── home.js         # Stats counter, selected projects, focus items
 │   ├── about.js        # Bio, experience accordion, skills bars, education, certs, interests
-│   ├── projects.js     # Timeline, filters, thesis card, hardware grid
+│   ├── projects.js     # Timeline, filters, thesis card, hardware grid, video embeds
 │   └── contact.js      # Contact info render, form submit (mailto)
 │
 ├── styles/
@@ -40,8 +40,15 @@ Hosted on Vercel via GitHub auto-deploy. No build step — Vercel serves files d
 │
 └── assets/
     ├── portrait.jpg            # Profile photo
-    ├── Hao_Joaquin_Resume.pdf  # Résumé (download link on home + contact)
-    └── music/                  # MP3 files for the OST player
+    ├── Hao_Joaquin_Resume.pdf  # Résumé
+    ├── music/                  # MP3 files for the OST player
+    └── img/                    # All images: cert badges, thesis photo, hw project photos
+        ├── thesis-team.jpg
+        ├── cert-aws-ccp.png
+        ├── cert-aws-cloud-quest.png
+        ├── cert-datacamp-dataengassoc.png
+        ├── cert-comptia-itf.png
+        └── hw-{slug}.jpg       # Hardware project photos (drop in to activate)
 ```
 
 ---
@@ -72,39 +79,44 @@ CSS variable names: `--bg`, `--bg-elev`, `--bg-inset`, `--ink`, `--ink-soft`, `-
 
 ## Deployment workflow
 
-Every `git push` to `master` auto-deploys via Vercel. Standard commit pattern:
+Every `git push` to `master` auto-deploys via Vercel (~30s). Standard commit pattern:
 
 ```bash
-git add <files>
-git commit -m "feat|fix|chore: description"
+git add <specific files>
+git commit -m "feat|fix|chore|style: description"
 git push
 ```
 
-Always push after changes — Vercel picks it up within ~30s.
-
-**Never edit files directly on GitHub** — always edit locally and push.
+Always push after changes. Never `git add -A` blindly — stage specific files only.
 
 ---
 
 ## Sub-agents
 
-The following agents handle specific categories of work. Invoke them by name when the task fits.
+Invoke any agent below by name. Each has a defined scope, files it touches, and a checklist.
+Agents never overlap scope — if a task crosses two agents, name both.
 
 ---
 
 ### 🗂 Content Agent
 
 **Trigger**: Adding or updating portfolio content — new project, cert, experience, music track,
-personal fact, bio, social link, or stat.
+personal fact, bio, social link, stat, hardware project detail, thesis update.
 
 **Only touches**: `data/portfolio.js`
 
+**Validation before every commit**:
+- All string values are quoted (no bare identifiers)
+- No trailing commas before `}`
+- All `src` / `image` / `badge` / `video` paths are quoted strings
+- Referenced asset files actually exist in `assets/`
+
 **Patterns**:
 
-Add a project:
 ```js
+// Add a project
 {
-  slug: "unique-slug",          // used for anchor links
+  slug: "unique-slug",
   title: "Project Title",
   period: "Month YYYY",
   blurb: "One-sentence description.",
@@ -112,11 +124,10 @@ Add a project:
   role: "Your role",
   stack: ["Tech1", "Tech2"],
   bullets: ["What you did...", "..."],
+  video: null,           // YouTube ID string when ready
 }
-```
 
-Add experience:
-```js
+// Add experience
 {
   org: "Company / Event",
   role: "Your title",
@@ -126,49 +137,43 @@ Add experience:
   bullets: ["..."],
   tags: ["Tag1", "Tag2"],
 }
-```
 
-Add a cert:
-```js
-{ name: "Cert Name", issuer: "Issuer", year: "YYYY" }
-```
+// Add a cert
+{ name: "Cert Name", issuer: "Issuer", year: "YYYY", badge: "assets/img/cert-slug.png" }
 
-Add a music track (drop MP3 into `assets/music/` first):
-```js
+// Add a music track (MP3 must already be in assets/music/)
 { title: "Track Name", game: "Source / Game", src: "assets/music/filename.mp3" }
+
+// Update thesis: title, period, advisors, status, blurb, topics[],
+//   members.software[], members.hardware[], myContributions[], videos[], teamPhoto
+
+// Update hardware project: add period, blurb, stack[], status, image path
 ```
-
-Update thesis fields: `title`, `period`, `advisors`, `status`, `blurb`, `topics[]`,
-`members.software[]`, `members.hardware[]`, `myContributions[]`
-
-Update hardware projects: `hardwareProjects[]` array — same shape as projects but with a `status` badge.
-
-**Always**: validate JS syntax before committing. Quote all string values. No bare identifiers as values.
 
 ---
 
 ### 🎨 Design Agent
 
-**Trigger**: Visual changes — new section layout, animation, color tweak, typography,
-responsive fix, component styling.
+**Trigger**: Visual changes — new section layout, animation tweak, color change, typography
+adjustment, spacing fix, new UI component, responsive breakpoint fix.
 
-**Touches**: `styles/*.css`, `scripts/shared.js` (player/nav/footer HTML),
-page HTML files for structural layout only.
+**Touches**: `styles/*.css`, `scripts/shared.js` (nav/footer/player HTML), HTML files (structure only)
 
 **Rules**:
-- Extend `tokens.css` variables; never hardcode hex colors in component CSS.
-- All new sections need a `.reveal` class on their top-level element for scroll-in animation.
-- Mobile breakpoint: `max-width: 768px`. Compact breakpoint: `max-width: 500px`.
-- Futuristic-tech aesthetic — dark, cyan/violet glows, mono labels, Space Grotesk headers.
-- Match existing pattern: `eyebrow` → `section-title` → content, inside a `.wrap` container.
-- Cache-bust changed CSS with `?v=N` query param on the `<link>` tag if browser caching is an issue.
+- Extend `tokens.css` variables — never hardcode hex colors in component CSS
+- All new top-level sections need `.reveal` class for scroll-in animation
+- Mobile breakpoint: `max-width: 768px`. Compact: `max-width: 500px`
+- Futuristic-tech aesthetic: dark bg, cyan/violet glows, mono labels, Space Grotesk headers
+- Match pattern: `eyebrow` → `section-title` → content, inside `.wrap` container
+- Cache-bust changed CSS with `?v=N` on the `<link>` tag in the HTML file
 
 **New section checklist**:
-1. Add HTML stub to the relevant `.html` file
-2. Add render function to the relevant `scripts/*.js` file
-3. Add data shape to `data/portfolio.js`
-4. Add CSS to the relevant `styles/*.css` file
-5. Call the render function in `DOMContentLoaded`
+1. HTML stub in `.html` file
+2. Render function in `scripts/*.js`
+3. Data shape in `data/portfolio.js`
+4. CSS in `styles/*.css`
+5. Call render in `DOMContentLoaded`
+6. Bump CSS `?v=N` version
 
 ---
 
@@ -176,73 +181,147 @@ page HTML files for structural layout only.
 
 **Trigger**: Any time changes are ready to go live.
 
-**Checks before committing**:
-1. `data/portfolio.js` — valid JS? All `src` values quoted? No bare identifiers?
-2. Asset paths — do referenced files exist locally?
+**Pre-commit checklist**:
+1. `data/portfolio.js` syntax valid? All values quoted? No bare identifiers?
+2. Asset paths exist locally (`assets/img/`, `assets/music/`)?
 3. `git status` — only intended files staged?
+4. CSS versions bumped on any changed stylesheets?
 
-**Commit format**:
-```
-feat:  new feature or content
-fix:   bug fix or broken syntax
-chore: config, deps, tooling
-style: visual-only CSS changes
-```
+**Commit types**: `feat` · `fix` · `chore` · `style`
 
-**Push**:
-```bash
-git add <specific files — never git add -A blindly>
-git commit -m "type: description\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
-git push
-```
+**Always append**: `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`
 
-Verify deploy: check https://e-portfolio-two-eta.vercel.app ~30s after push.
+**Post-push**: confirm Vercel deploy is `● Ready` via `vercel ls`.
 
 ---
 
 ### 🖼 Media Agent
 
-**Trigger**: Adding photos, project screenshots, or new music tracks.
+**Trigger**: Adding photos, project screenshots, cert badges, or new music tracks.
 
-**Rules**:
-- Portrait: replace `assets/portrait.jpg` (keep same filename)
-- Music: drop MP3s in `assets/music/`, add entry to `portfolio.js → music[]`, ensure `src` is a quoted string
-- Project images: store in `assets/img/`, reference via a new `image` field on the project object
-  (Design Agent needed to wire the `<img>` into the card template)
-- Résumé: replace `assets/Hao_Joaquin_Resume.pdf` (keep same filename)
-- All binary assets must be committed to git — Vercel serves directly from the repo
+**Asset naming conventions**:
+| Asset type      | Location          | Naming pattern              |
+|-----------------|-------------------|-----------------------------|
+| Portrait        | `assets/`         | `portrait.jpg` (fixed)      |
+| Thesis photo    | `assets/img/`     | `thesis-team.jpg`           |
+| Cert badge      | `assets/img/`     | `cert-{slug}.png`           |
+| HW project photo| `assets/img/`     | `hw-{slug}.jpg`             |
+| Project screenshot | `assets/img/`  | `proj-{slug}.jpg`           |
+| Music track     | `assets/music/`   | `filename.mp3`              |
+| Résumé          | `assets/`         | `Hao_Joaquin_Resume.pdf` (fixed) |
 
-**Size guidance**: portrait ≤ 500 KB, music MP3 ≤ 8 MB each, screenshots ≤ 300 KB
+**Size limits**: portrait ≤ 500 KB · music ≤ 8 MB · images ≤ 300 KB
+**All binary assets must be committed to git** — Vercel serves directly from the repo.
 
 ---
 
 ### 🔧 Debug Agent
 
-**Trigger**: Something broke — nav missing, content not rendering, music not playing, styles wrong.
+**Trigger**: Something broke — nav missing, content not rendering, music not playing, styles wrong, images not showing.
 
-**First checks**:
-1. Open browser DevTools → Console tab. Any red errors? JS parse errors in `portfolio.js`
-   will kill *everything* (nav, footer, all dynamic content).
-2. Check `data/portfolio.js` for syntax errors — unquoted `src` values, trailing commas before `}`,
-   mismatched brackets.
-3. Check asset paths — do the files actually exist at the path referenced?
-4. CSS not updating? Add `?v=N` to the stylesheet `<link>` in the HTML file.
-5. Check Vercel deploy logs at https://vercel.com/joaquin-alec-haos-projects/e-portfolio
+**Diagnosis order**:
+1. Browser DevTools → Console. Any red errors? A JS parse error in `portfolio.js` kills *everything*.
+2. Check `portfolio.js` for syntax errors: unquoted values, trailing commas before `}`, mismatched brackets.
+3. Check asset paths — does the file physically exist in `assets/`?
+4. CSS not updating? Bump `?v=N` on the `<link>` tag.
+5. Check Vercel logs: https://vercel.com/joaquin-alec-haos-projects/e-portfolio
 
-**Most common past bugs**:
-- Unquoted `src` values in `music[]` → entire `portfolio.js` fails to parse
-- `assets/music/` in `.gitignore` → MP3s not deployed to Vercel
-- CSS browser cache → append `?v=N` query to `<link href>`
+**Known past bugs** (do not repeat):
+- Unquoted `src` in `music[]` → entire `portfolio.js` fails to parse → nav + all content disappears
+- `assets/music/` in `.gitignore` → MP3s not deployed
+- Hardcoded asset path instead of using data field variable (e.g. `src="assets/thesis-team.jpg"` instead of `src="${t.teamPhoto}"`)
+- CSS browser cache → bump `?v=N`
+
+---
+
+### ⚡ Performance Agent
+
+**Trigger**: "Improve performance", "site feels slow", "optimize loading", "check page speed", or proactively after adding new images/scripts.
+
+**Scope**: asset optimization, lazy loading, CSS efficiency, script loading, Vercel config.
+
+**Checklist**:
+- All `<img>` tags have `loading="lazy"` and `decoding="async"`
+- Video embeds use click-to-play (never auto-load iframes)
+- Images in `assets/img/` are ≤ 300 KB — flag any that exceed this
+- No render-blocking scripts (all `<script>` tags at bottom of `<body>`)
+- CSS is not duplicated across files — shared rules belong in `tokens.css`
+- Unused CSS classes — identify and remove
+- `assets/music/` MP3s are ≤ 8 MB each
+- Fonts loaded via `preconnect` (already in place — verify not removed)
+- Run `vercel ls` to confirm latest deploy is `● Ready` and build time is under 10s
+
+**Automatic fixes it can make**:
+- Add missing `loading="lazy"` / `decoding="async"` to any `<img>` found without them
+- Convert any inline `style=""` attributes into proper CSS classes
+- Deduplicate repeated CSS rules across stylesheets
+
+---
+
+### 🎯 UI Review Agent
+
+**Trigger**: "Review the UI", "check how it looks", "audit the layout", "improve presentation", or after a major feature addition.
+
+**Scope**: visual consistency, spacing, typography, responsive behaviour, component polish — across all 4 pages.
+
+**Review checklist per page**:
+- [ ] Eyebrow → title → content hierarchy is consistent
+- [ ] Section spacing matches the grid (multiples of 8px / 16px)
+- [ ] All cards have consistent padding, border-radius, hover states
+- [ ] Reveal animations trigger correctly (no elements stuck hidden)
+- [ ] Light mode looks as good as dark mode
+- [ ] No text overflows or truncates unexpectedly
+- [ ] Mobile (360px–768px): no horizontal scroll, no broken layouts
+- [ ] Interactive elements (buttons, links, chips) have visible focus states
+
+**What it produces**: a prioritised list of issues → immediately fixes any CSS-only issues → flags structural issues for Design Agent.
+
+---
+
+### 📋 Content Audit Agent
+
+**Trigger**: "Audit my content", "what's still a placeholder", "what needs updating", or before sharing the portfolio with anyone important.
+
+**Scope**: read-only scan of `data/portfolio.js` — never edits anything, only reports.
+
+**Scans for**:
+- Any field containing `"TBD"`, `"coming soon"`, `"placeholder"`, `"add your"`, `"to be filled"`, or `null`
+- Projects missing `highlight`, `bullets`, or `stack`
+- Hardware projects with empty `stack: []` or default blurb
+- `personalFacts` entries with placeholder values
+- `thesis.advisors` still set to `"To be filled"`
+- Music tracks with `src: null`
+- Cert / HW cards with `badge` / `image` paths pointing to files that don't exist
+
+**Output format**: grouped table — section → field → current value → suggested action.
+
+---
+
+### ✨ Polish Agent
+
+**Trigger**: "Polish the site", "make it more impressive", "improve the portfolio presentation", "level up the UI" — run this before sharing with recruiters or after a content update.
+
+**Scope**: holistic improvement pass across Design + Performance + UI Review simultaneously. Combines all three agents in one sweep.
+
+**Pass order**:
+1. **Performance pass** — fix all lazy loading, check image sizes, verify no blocking resources
+2. **UI consistency pass** — spacing, typography scale, hover states, reveal animations
+3. **Content presentation pass** — are descriptions punchy? Are highlights specific? Are tech stacks complete?
+4. **Mobile pass** — test layouts at 360px, 540px, 768px breakpoints
+5. **Dark/light pass** — verify both themes look sharp
+6. **Final deploy** — commit all improvements, push, verify `● Ready`
 
 ---
 
 ## Planned / future work
 
-- [ ] Add thesis photos (group photo + solo robot shots) via Media Agent
+- [ ] Add thesis photos (solo robot shots) via Media Agent
 - [ ] Fill in thesis `advisors` field when confirmed
-- [ ] Add real hardware/robotics project details when ready to document
+- [ ] Add real hardware project details (period, blurb, stack) when ready
+- [ ] Add hardware project photos to `assets/img/hw-{slug}.jpg`
 - [ ] Add project screenshots/thumbnails to timeline cards
 - [ ] Favicon + OG image for social link previews
 - [ ] Bio paragraph in Joaquin's own voice
 - [ ] Blog page scaffold (empty, ready for first post)
-- [ ] Case-study deep-dive page for a headline project (Pokémon binder or THRIVE)
+- [ ] THRIVE demo video — add YouTube ID to `video` field when ready
+- [ ] Case-study deep-dive page for a headline project
