@@ -58,8 +58,7 @@ window.PORTFOLIO = {
       "Software paper documentation management and documents oversight across both teams",
     ],
     videos: [
-      { label: "System Demo", id: "nJzlzAAUDlA" },
-      { label: "Thesis Presentation", id: "hE_q9dPcMeE" },
+      { label: "Thesis Defense Presentation", id: "hE_q9dPcMeE" },
     ],
   },
 
@@ -168,7 +167,7 @@ window.PORTFOLIO = {
         "Built core backend: auth, data storage, and application pipeline.",
         "Contributed to frontend and UI/UX decisions.",
       ],
-      video: null, // add YouTube video ID here when ready, e.g. "dQw4w9WgXcQ"
+      video: "nJzlzAAUDlA",
     },
     {
       slug: "inventory-system",

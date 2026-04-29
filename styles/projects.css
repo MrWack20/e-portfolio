@@ -455,6 +455,10 @@
   gap: 20px;
   margin-top: 14px;
 }
+.video-grid.video-grid-single {
+  grid-template-columns: 1fr;
+  max-width: 720px;
+}
 
 /* --- Responsive --- */
 @media (max-width: 960px) {

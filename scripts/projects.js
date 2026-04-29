@@ -128,11 +128,11 @@ function renderThesis() {
 
     ${t.videos && t.videos.length ? `
     <div class="thesis-videos">
-      <div class="tl-block-label" style="margin-bottom:14px;">— Demo Videos</div>
-      <div class="video-grid">
+      <div class="tl-block-label" style="margin-bottom:14px;">— ${t.videos.length === 1 ? t.videos[0].label : "Demo Videos"}</div>
+      <div class="video-grid ${t.videos.length === 1 ? 'video-grid-single' : ''}">
         ${t.videos.map(v => `
           <div class="video-item">
-            <div class="video-item-label">${v.label}</div>
+            ${t.videos.length > 1 ? `<div class="video-item-label">${v.label}</div>` : ""}
             ${videoEmbed(v.id, v.label)}
           </div>
         `).join("")}
