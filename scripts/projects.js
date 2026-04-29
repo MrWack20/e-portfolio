@@ -195,7 +195,7 @@ function renderHardware() {
       <div class="hw-meta">${h.period}</div>
       <h3 class="hw-title">${h.title}</h3>
       <p class="hw-blurb">${h.blurb}</p>
-      <div class="tl-stack">${h.stack.map(s => `<span>${s}</span>`).join("")}</div>
+      ${h.stack && h.stack.length ? `<div class="tl-stack">${h.stack.map(s => `<span>${s}</span>`).join("")}</div>` : ""}
     </div>
   `).join("");
 }

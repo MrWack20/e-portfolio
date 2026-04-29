@@ -322,7 +322,7 @@
 .hw-section { margin-top: 88px; }
 .hw-section .section-head { display: block; margin-bottom: 24px; }
 .hw-section .section-title { grid-column: auto; grid-row: auto; }
-.hw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.hw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .hw-card {
   background: var(--bg-elev); border: 1px dashed var(--line);
   border-radius: var(--r-md); padding: 24px 26px;
@@ -342,7 +342,8 @@
 .hw-title { font-family: var(--font-display); font-size: 18px; font-weight: 500; margin: 0 0 10px; padding-right: 90px; letter-spacing: -0.01em; }
 .hw-blurb { color: var(--ink-soft); font-size: 13px; line-height: 1.5; margin-bottom: 16px; }
 .hw-note { margin-top: 16px; color: var(--ink-mute); font-size: 12px; font-family: var(--font-mono); }
-@media (max-width: 640px) { .hw-grid { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .hw-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .hw-grid { grid-template-columns: 1fr; } }
 
 /* =====================================================
    VIDEO — CLICK-TO-PLAY + 2-COLUMN CARD LAYOUT
