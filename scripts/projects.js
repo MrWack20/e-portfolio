@@ -2,6 +2,42 @@
 
 let activeFilter = "All";
 
+// ---------- CLICK-TO-PLAY VIDEO EMBED ----------
+function videoEmbed(id, title) {
+  return `
+    <div class="video-wrap" data-vid="${id}">
+      <img class="video-poster"
+           src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"
+           alt="${title}"
+           loading="lazy"
+           decoding="async" />
+      <button class="video-play-btn" aria-label="Play ${title}">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    </div>
+  `;
+}
+
+// Single delegated listener — swaps poster for live iframe on click
+document.addEventListener("click", e => {
+  const wrap = e.target.closest(".video-wrap[data-vid]");
+  if (!wrap) return;
+  const id   = wrap.dataset.vid;
+  const title = wrap.querySelector("img")?.alt || "Demo";
+  wrap.innerHTML = `
+    <iframe
+      src="https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&autoplay=1"
+      title="${title}"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  `;
+  wrap.classList.add("playing");
+});
+
+// ---------- FILTERS ----------
 function allTags() {
   const set = new Set(["All"]);
   PORTFOLIO.projects.forEach(p => p.stack.forEach(s => set.add(s)));
@@ -22,6 +58,7 @@ function renderFilters() {
   });
 }
 
+// ---------- TIMELINE ----------
 function renderTimeline() {
   const el = document.getElementById("timeline-list");
   const list = activeFilter === "All"
@@ -29,74 +66,58 @@ function renderTimeline() {
     : PORTFOLIO.projects.filter(p => p.stack.includes(activeFilter));
 
   if (list.length === 0) {
-    el.innerHTML = `<div class="tl-card reveal" style="text-align:center; color: var(--ink-mute);">No projects match <strong>${activeFilter}</strong>.</div>`;
+    el.innerHTML = `<div class="tl-card reveal" style="text-align:center;color:var(--ink-mute);">No projects match <strong>${activeFilter}</strong>.</div>`;
     return;
   }
 
   el.innerHTML = list.map(p => `
     <article id="${p.slug}" class="tl-item reveal">
       <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-meta">
-          <span>${p.period}</span>
-          <span class="pill">${p.role}</span>
-        </div>
-        <h2 class="tl-title">${p.title}</h2>
-        <p class="tl-blurb">${p.blurb}</p>
-        <div class="tl-highlight">${p.highlight}</div>
-        <div class="tl-detail">
-          <div>
-            <div class="tl-block-label">What I did</div>
-            <ul class="tl-bullets">
-              ${p.bullets.map(b => `<li>${b}</li>`).join("")}
-            </ul>
+      <div class="tl-card ${p.video ? 'has-video' : ''}">
+
+        <div class="tl-content">
+          <div class="tl-meta">
+            <span>${p.period}</span>
+            <span class="pill">${p.role}</span>
           </div>
-          <div>
-            <div class="tl-block-label">Stack</div>
-            <div class="tl-stack">
-              ${p.stack.map(s => `<span>${s}</span>`).join("")}
+          <h2 class="tl-title">${p.title}</h2>
+          <p class="tl-blurb">${p.blurb}</p>
+          <div class="tl-highlight">${p.highlight}</div>
+          <div class="tl-detail">
+            <div>
+              <div class="tl-block-label">What I did</div>
+              <ul class="tl-bullets">
+                ${p.bullets.map(b => `<li>${b}</li>`).join("")}
+              </ul>
+            </div>
+            <div>
+              <div class="tl-block-label">Stack</div>
+              <div class="tl-stack">
+                ${p.stack.map(s => `<span>${s}</span>`).join("")}
+              </div>
             </div>
           </div>
         </div>
+
         ${p.video ? `
-        <div class="tl-video">
-          <div class="tl-block-label">Demo</div>
-          <div class="video-wrap">
-            <iframe
-              src="https://www.youtube.com/embed/${p.video}?rel=0&modestbranding=1"
-              title="${p.title} demo"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
+        <div class="tl-video-col">
+          <div class="tl-block-label tl-vid-label">— Demo</div>
+          ${videoEmbed(p.video, p.title + " demo")}
         </div>` : ""}
+
       </div>
     </article>
   `).join("");
 
-  // Re-init reveal for new nodes
   requestAnimationFrame(() => initReveal());
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderFilters();
-  renderTimeline();
-  bootPage("projects");
-
-  // scroll to hash after render
-  setTimeout(() => {
-    if (location.hash) {
-      const el = document.querySelector(location.hash);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, 300);
-});
-
-// ---------- THESIS + HARDWARE ----------
+// ---------- THESIS ----------
 function renderThesis() {
   const el = document.getElementById("thesis-card");
   if (!el) return;
   const t = PORTFOLIO.thesis;
+
   el.innerHTML = `
     <div class="thesis-meta">
       <span class="thesis-status">${t.status}</span>
@@ -104,6 +125,20 @@ function renderThesis() {
     </div>
     <h3 class="thesis-title">${t.title}</h3>
     <p class="thesis-blurb">${t.blurb}</p>
+
+    ${t.videos && t.videos.length ? `
+    <div class="thesis-videos">
+      <div class="tl-block-label" style="margin-bottom:14px;">— Demo Videos</div>
+      <div class="video-grid">
+        ${t.videos.map(v => `
+          <div class="video-item">
+            <div class="video-item-label">${v.label}</div>
+            ${videoEmbed(v.id, v.label)}
+          </div>
+        `).join("")}
+      </div>
+    </div>` : ""}
+
     <div class="thesis-detail">
       <div>
         <div class="tl-block-label">Advisors</div>
@@ -114,6 +149,7 @@ function renderThesis() {
         <div class="tl-stack">${t.topics.map(x => `<span>${x}</span>`).join("")}</div>
       </div>
     </div>
+
     ${t.myContributions ? `
     <div class="thesis-contributions">
       <div class="tl-block-label">My contributions</div>
@@ -121,6 +157,7 @@ function renderThesis() {
         ${t.myContributions.map(b => `<li>${b}</li>`).join("")}
       </ul>
     </div>` : ""}
+
     ${t.members ? `
     <div class="thesis-members">
       <div class="tl-block-label">Team members</div>
@@ -135,28 +172,10 @@ function renderThesis() {
         </div>
       </div>
     </div>` : ""}
-    ${t.videos && t.videos.length ? `
-    <div class="thesis-videos">
-      <div class="tl-block-label">Demo Videos</div>
-      <div class="video-grid">
-        ${t.videos.map(v => `
-          <div class="video-item">
-            <div class="video-label">${v.label}</div>
-            <div class="video-wrap">
-              <iframe
-                src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1"
-                title="${v.label}"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        `).join("")}
-      </div>
-    </div>` : ""}
   `;
 }
 
+// ---------- HARDWARE ----------
 function renderHardware() {
   const el = document.getElementById("hw-grid");
   if (!el) return;
@@ -171,7 +190,18 @@ function renderHardware() {
   `).join("");
 }
 
+// ---------- INIT ----------
 document.addEventListener("DOMContentLoaded", () => {
+  renderFilters();
+  renderTimeline();
   renderThesis();
   renderHardware();
+  bootPage("projects");
+
+  setTimeout(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, 300);
 });

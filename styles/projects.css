@@ -344,20 +344,79 @@
 .hw-note { margin-top: 16px; color: var(--ink-mute); font-size: 12px; font-family: var(--font-mono); }
 @media (max-width: 640px) { .hw-grid { grid-template-columns: 1fr; } }
 
-/* VIDEO EMBEDS */
-.thesis-videos {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line-soft);
+/* =====================================================
+   VIDEO — CLICK-TO-PLAY + 2-COLUMN CARD LAYOUT
+   ===================================================== */
+
+/* Core wrapper — 16:9 aspect ratio box */
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--bg-inset);
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
-.video-grid {
+.video-wrap:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 28px var(--accent-glow);
+}
+
+/* Thumbnail poster */
+.video-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-out), filter 0.3s;
+}
+.video-wrap:hover .video-poster {
+  transform: scale(1.04);
+  filter: brightness(0.55);
+}
+
+/* Glowing play button */
+.video-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--bg) 55%, transparent);
+  border: 2px solid var(--accent);
+  color: var(--accent);
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 14px;
+  place-items: center;
+  box-shadow: 0 0 20px var(--accent-glow), inset 0 0 20px color-mix(in oklab, var(--accent) 10%, transparent);
+  transition: transform 0.3s var(--ease-out), background 0.3s, color 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
-.video-item {}
-.video-label {
+.video-play-btn svg {
+  width: 26px; height: 26px;
+  margin-left: 4px; /* optical center for play triangle */
+}
+.video-wrap:hover .video-play-btn {
+  transform: translate(-50%, -50%) scale(1.14);
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 0 40px var(--accent-glow), 0 8px 24px rgba(0,0,0,0.45);
+}
+
+/* Live iframe (after click) */
+.video-wrap.playing { cursor: default; }
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+
+/* Video item label (below eyebrow) */
+.video-item-label {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -365,28 +424,49 @@
   color: var(--ink-mute);
   margin-bottom: 8px;
 }
-.video-wrap {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
-  background: var(--bg-inset);
-  box-shadow: 0 0 24px color-mix(in oklab, var(--accent) 8%, transparent);
+
+/* --- Timeline card: 2-column layout when video is present --- */
+.tl-card.has-video {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 32px;
+  align-items: start;
 }
-.video-wrap iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border: 0;
+.tl-content { min-width: 0; }
+
+.tl-video-col {
+  position: sticky;
+  top: 88px; /* below nav */
 }
-.tl-video {
-  margin-top: 24px;
-  padding-top: 20px;
+.tl-vid-label {
+  margin-bottom: 10px;
+}
+
+/* --- Thesis videos: 2-col grid inside the card --- */
+.thesis-videos {
+  margin: 28px 0 24px;
+  padding: 24px 0;
   border-top: 1px solid var(--line-soft);
-  max-width: 640px;
+  border-bottom: 1px solid var(--line-soft);
 }
-@media (max-width: 720px) {
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 14px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 960px) {
+  .tl-card.has-video {
+    grid-template-columns: 1fr;
+  }
+  .tl-video-col {
+    position: static;
+  }
+}
+@media (max-width: 640px) {
   .video-grid { grid-template-columns: 1fr; }
+  .video-play-btn { width: 52px; height: 52px; }
+  .video-play-btn svg { width: 22px; height: 22px; }
 }
