@@ -314,12 +314,9 @@ window.PORTFOLIO = {
   ],
 
   personalFacts: [
-    { label: "Favorite games",    value: "JRPGs, Pokémon, story-driven adventures" },
-    { label: "Currently playing", value: "Add your current game here" },
-    { label: "Anime",             value: "Always open to recommendations" },
+    { label: "Favorite games",      value: "JRPGs, Pokémon, story-driven adventures" },
+    { label: "Anime",               value: "Always open to recommendations" },
     { label: "YouTube rabbit hole", value: "Tech deep-dives, engineering breakdowns, retrospectives" },
-    { label: "Coffee or tea",     value: "Coffee — iced, strong" },
-    { label: "Dream project",     value: "Something that mixes hardware and cloud in the real world" },
   ],
 
   // ---------- MUSIC (OST PLAYER) ----------
