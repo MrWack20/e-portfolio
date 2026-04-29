@@ -20,6 +20,20 @@ function videoEmbed(id, title) {
   `;
 }
 
+// Pokéball demo link — animate open then open URL in new tab
+document.addEventListener("click", e => {
+  const link = e.target.closest(".pokeball-link");
+  if (!link) return;
+  e.preventDefault();
+  const ball = link.querySelector(".pokeball");
+  if (ball.classList.contains("open")) return;
+  ball.classList.add("open");
+  setTimeout(() => {
+    window.open(link.href, "_blank", "noopener,noreferrer");
+    setTimeout(() => ball.classList.remove("open"), 700);
+  }, 500);
+});
+
 // Single delegated listener — swaps poster for live iframe on click
 document.addEventListener("click", e => {
   const wrap = e.target.closest(".video-wrap[data-vid]");
@@ -97,6 +111,20 @@ function renderTimeline() {
               </div>
             </div>
           </div>
+
+          ${p.demo ? `
+          <div class="tl-demo">
+            <a class="pokeball-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
+              <div class="pokeball">
+                <div class="pokeball-top"></div>
+                <div class="pokeball-bottom"></div>
+                <div class="pokeball-band"></div>
+                <div class="pokeball-btn-circle"></div>
+              </div>
+              <span class="pokeball-label">Open Live Demo ↗</span>
+            </a>
+          </div>` : ""}
+
         </div>
 
         ${p.video ? `

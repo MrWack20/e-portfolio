@@ -529,3 +529,118 @@
   .video-play-btn { width: 52px; height: 52px; }
   .video-play-btn svg { width: 22px; height: 22px; }
 }
+
+/* =====================================================
+   POKÉBALL LIVE DEMO BUTTON
+   ===================================================== */
+.tl-demo {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.pokeball-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+/* Ball container — overflow:visible so top half can animate outside */
+.pokeball {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  flex-shrink: 0;
+  animation: pokeball-float 3s ease-in-out infinite;
+}
+
+@keyframes pokeball-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-7px); }
+}
+
+.pokeball:hover,
+.pokeball.open { animation: none; }
+
+.pokeball-link:hover .pokeball {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 14px var(--accent-glow));
+}
+
+/* Top half — red */
+.pokeball-top {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 50%;
+  background: #d92b2b;
+  border-radius: 60px 60px 0 0;
+  border: 2.5px solid #0a0a18;
+  border-bottom: none;
+  transform-origin: center bottom;
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 3;
+}
+
+/* Bottom half — light grey */
+.pokeball-bottom {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 50%;
+  background: #d0d0d0;
+  border-radius: 0 0 60px 60px;
+  border: 2.5px solid #0a0a18;
+  border-top: none;
+  z-index: 1;
+}
+
+/* Horizontal band */
+.pokeball-band {
+  position: absolute;
+  top: calc(50% - 4px);
+  left: 0; right: 0;
+  height: 8px;
+  background: #0a0a18;
+  z-index: 2;
+}
+
+/* Center button */
+.pokeball-btn-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #c8c8c8;
+  border: 2.5px solid #0a0a18;
+  z-index: 5;
+  transition: background 0.3s, box-shadow 0.4s;
+}
+
+/* Open animation */
+.pokeball.open .pokeball-top {
+  transform: translateY(-88%) rotate(-12deg);
+}
+.pokeball.open .pokeball-btn-circle {
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent), 0 0 32px var(--accent-glow);
+}
+
+/* Label */
+.pokeball-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  transition: color 0.2s, letter-spacing 0.2s;
+}
+.pokeball-link:hover .pokeball-label {
+  color: var(--ink);
+  letter-spacing: 0.10em;
+}
+
+@media (max-width: 540px) {
+  .pokeball { width: 52px; height: 52px; }
+}
