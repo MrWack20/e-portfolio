@@ -34,6 +34,20 @@ document.addEventListener("click", e => {
   }, 500);
 });
 
+// Launch (paper plane) demo link — fire then open URL in new tab
+document.addEventListener("click", e => {
+  const link = e.target.closest(".launch-link");
+  if (!link) return;
+  e.preventDefault();
+  const icon = link.querySelector(".launch-icon");
+  if (icon.classList.contains("fired")) return;
+  icon.classList.add("fired");
+  setTimeout(() => {
+    window.open(link.href, "_blank", "noopener,noreferrer");
+    setTimeout(() => icon.classList.remove("fired"), 700);
+  }, 450);
+});
+
 // Single delegated listener — swaps poster for live iframe on click
 document.addEventListener("click", e => {
   const wrap = e.target.closest(".video-wrap[data-vid]");
@@ -50,6 +64,36 @@ document.addEventListener("click", e => {
   `;
   wrap.classList.add("playing");
 });
+
+// ---------- DEMO BUTTONS ----------
+function renderDemoButton(p) {
+  if (p.demoStyle === "launch") {
+    return `
+              <div class="tl-demo">
+                <a class="launch-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
+                  <div class="launch-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="28" height="28">
+                      <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+                    </svg>
+                  </div>
+                  <span class="launch-label">Launch VoyageAI ↗</span>
+                </a>
+              </div>`;
+  }
+  // default: pokeball
+  return `
+              <div class="tl-demo">
+                <a class="pokeball-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
+                  <div class="pokeball">
+                    <div class="pokeball-top"></div>
+                    <div class="pokeball-bottom"></div>
+                    <div class="pokeball-band"></div>
+                    <div class="pokeball-btn-circle"></div>
+                  </div>
+                  <span class="pokeball-label">Click the Pokéball to visit the website</span>
+                </a>
+              </div>`;
+}
 
 // ---------- FILTERS ----------
 function allTags() {
@@ -109,18 +153,7 @@ function renderTimeline() {
               <div class="tl-stack">
                 ${p.stack.map(s => `<span>${s}</span>`).join("")}
               </div>
-              ${p.demo ? `
-              <div class="tl-demo">
-                <a class="pokeball-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
-                  <div class="pokeball">
-                    <div class="pokeball-top"></div>
-                    <div class="pokeball-bottom"></div>
-                    <div class="pokeball-band"></div>
-                    <div class="pokeball-btn-circle"></div>
-                  </div>
-                  <span class="pokeball-label">Click the Pokéball to visit the website</span>
-                </a>
-              </div>` : ""}
+              ${p.demo ? renderDemoButton(p) : ""}
             </div>
           </div>
 

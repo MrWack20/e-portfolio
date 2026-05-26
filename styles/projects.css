@@ -647,3 +647,68 @@
   .pokeball-top  { border-radius: 68px 68px 0 0; }
   .pokeball-bottom { border-radius: 0 0 68px 68px; }
 }
+
+/* =====================================================
+   LAUNCH (PAPER PLANE) DEMO BUTTON — VoyageAI
+   ===================================================== */
+.launch-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.launch-icon {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--bg-elev);
+  border: 2px solid var(--line);
+  display: grid;
+  place-items: center;
+  animation: pokeball-float 3s ease-in-out infinite; /* reuse same float keyframe */
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.launch-icon svg {
+  color: var(--accent);
+  transform: rotate(-15deg); /* slight upward tilt */
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.38s;
+}
+
+.launch-link:hover .launch-icon,
+.launch-icon.fired {
+  animation: none;
+}
+
+.launch-link:hover .launch-icon {
+  border-color: var(--accent);
+  box-shadow: 0 0 24px var(--accent-glow);
+  background: color-mix(in oklab, var(--accent) 10%, var(--bg-elev));
+}
+
+.launch-icon.fired {
+  border-color: var(--accent);
+  box-shadow: 0 0 32px var(--accent-glow);
+}
+
+.launch-icon.fired svg {
+  transform: translate(22px, -22px) scale(0.15) rotate(-15deg);
+  opacity: 0;
+}
+
+.launch-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.launch-link:hover .launch-label {
+  color: var(--accent);
+}
