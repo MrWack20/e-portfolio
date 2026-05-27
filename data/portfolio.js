@@ -13,7 +13,7 @@ window.PORTFOLIO = {
   email: "joaquinhao@gmail.com",
   phone: "+63 917 532 2255",
   portrait: "assets/portrait.jpg",
-  resume: "assets/Hao_Joaquin_Resume.pdf",
+  resume: "assets/Hao_Joaquin_Resume_Updated.pdf",
 
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/joaquin-alec-hao-1a9861320/", handle: "linkedin.com/in/joaquin-alec-hao" },
