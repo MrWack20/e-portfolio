@@ -116,6 +116,19 @@
   border: 1px solid var(--line-soft);
   border-radius: 4px;
 }
+.exp-badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: color-mix(in oklab, var(--accent-2) 14%, var(--bg-inset));
+  border: 1px solid var(--accent-2);
+  color: var(--accent-2);
+}
 
 @media (max-width: 700px) {
   .exp-head { grid-template-columns: 1fr auto; gap: 10px; }

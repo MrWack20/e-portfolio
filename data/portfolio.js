@@ -136,6 +136,22 @@ window.PORTFOLIO = {
       ],
       tags: ["Data Engineering", "CRM", "Analytics"],
     },
+    {
+      org: "J's Pica-Pica atbp.",
+      role: "Co-founder — Finance, Systems & Packaging",
+      period: "2023 — Present",
+      location: "Online · Philippines",
+      badge: "Ongoing · Year 3",
+      summary: "3-person family snack reselling business run with my mom and younger brother. I own finance, packaging design, and the internal tooling that keeps operations lean.",
+      bullets: [
+        "Head of Finance — manage capital allocation (PHP 12,205 starting capital this year), COGS tracking, sales records, and revenue reporting across all product SKUs.",
+        "Built a full Google Sheets sales tracker with live inventory, COGS calculator, purchase logs, and a business performance dashboard — replacing manual spreadsheet work.",
+        "Developed order-tracking and inventory automation using Claude Code to reduce repetitive manual data entry for the team.",
+        "Packaging Designer — design product labels with a clean, minimal black-and-white aesthetic and evaluate packaging approach per SKU.",
+        "Current product: Cornick 250g (PHP 180/bag, bundle 3 for PHP 520); previously ran Calamansi juice, dried mango strips, and spicy butcheron.",
+      ],
+      tags: ["Google Sheets", "Claude Code", "Finance & Ops", "Automation", "Packaging Design"],
+    },
   ],
 
   projects: [

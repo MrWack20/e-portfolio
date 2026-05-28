@@ -14,6 +14,7 @@ function renderExperience() {
         <div>
           <h3 class="exp-title">${e.role}</h3>
           <div class="exp-org">${e.org} · ${e.location}</div>
+          ${e.badge ? `<span class="exp-badge">${e.badge}</span>` : ""}
         </div>
         <button class="exp-toggle" aria-label="Toggle details">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
