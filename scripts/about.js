@@ -2,7 +2,7 @@
 
 function renderLede() {
   const el = document.getElementById("about-lede");
-  el.innerHTML = `<p>${PORTFOLIO.bio} I'm currently <strong>interning in data governance</strong>, helping run a <strong>campus AWS club</strong>, and building things on the side — from <strong>card-collection apps</strong> to <strong>inclusive job platforms</strong>.</p>`;
+  el.innerHTML = `<p>${PORTFOLIO.bio} Fresh out of school and <strong>actively looking for my first full-time role</strong> — whether that's data engineering, backend development, or somewhere in between. In the meantime I'm still building things on the side — from <strong>AI-powered travel planners</strong> to <strong>card-collection apps</strong> to <strong>inclusive job platforms</strong>.</p>`;
 }
 
 function renderExperience() {
