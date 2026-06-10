@@ -249,7 +249,9 @@ function renderThesis() {
 function renderHardware() {
   const el = document.getElementById("hw-grid");
   if (!el) return;
-  el.innerHTML = PORTFOLIO.hardwareProjects.map(h => `
+  el.innerHTML = PORTFOLIO.hardwareProjects.map(h => {
+    const hasDetail = (h.images && h.images.length) || (h.materials && h.materials.length);
+    return `
     <div class="hw-card ${h.image ? 'has-img' : ''}">
       ${h.image ? `
       <div class="hw-img-wrap">
@@ -264,10 +266,80 @@ function renderHardware() {
         <div class="hw-meta">${h.period}</div>
         <h3 class="hw-title">${h.title}</h3>
         <p class="hw-blurb">${h.blurb}</p>
-        ${h.stack && h.stack.length ? `<div class="tl-stack">${h.stack.map(s => `<span>${s}</span>`).join("")}</div>` : ""}
+        ${h.stack && h.stack.length ? `
+        <div class="tl-stack hw-stack-preview">
+          ${h.stack.slice(0, 3).map(s => `<span>${s}</span>`).join("")}
+          ${h.stack.length > 3 ? `<span class="hw-more">+${h.stack.length - 3}</span>` : ""}
+        </div>` : ""}
+        ${hasDetail ? `
+        <button class="hw-detail-btn" data-slug="${h.slug}">
+          View details
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </button>` : ""}
       </div>
+    </div>`;
+  }).join("");
+
+  el.querySelectorAll(".hw-detail-btn").forEach(btn => {
+    btn.addEventListener("click", () => openHwModal(btn.dataset.slug));
+  });
+}
+
+// ---------- HW MODAL ----------
+function openHwModal(slug) {
+  const h = PORTFOLIO.hardwareProjects.find(p => p.slug === slug);
+  if (!h) return;
+
+  const body = document.getElementById("hw-modal-body");
+  const galleryImgs = h.images && h.images.length ? h.images
+    : (h.image ? [{ src: h.image, caption: "" }] : []);
+
+  body.innerHTML = `
+    <div class="hm-header">
+      <div class="hm-top">
+        <span class="hw-badge">${h.status}</span>
+        <span class="hm-period">${h.period}</span>
+      </div>
+      <h2 class="hm-title">${h.title}</h2>
     </div>
-  `).join("");
+
+    ${galleryImgs.length ? `
+    <div class="hm-gallery">
+      ${galleryImgs.map(img => `
+        <figure class="hm-img-item">
+          <img src="${img.src}" alt="${img.caption || h.title}" loading="lazy" decoding="async" />
+          ${img.caption ? `<figcaption>${img.caption}</figcaption>` : ""}
+        </figure>`).join("")}
+    </div>` : ""}
+
+    <p class="hm-blurb">${h.blurb}</p>
+
+    ${h.stack && h.stack.length ? `
+    <div class="hm-section">
+      <div class="hm-label">— Components & Stack</div>
+      <div class="tl-stack">${h.stack.map(s => `<span>${s}</span>`).join("")}</div>
+    </div>` : ""}
+
+    ${h.materials && h.materials.length ? `
+    <div class="hm-section">
+      <div class="hm-label">— Materials used</div>
+      <ul class="hm-materials">
+        ${h.materials.map(m => `<li>${m}</li>`).join("")}
+      </ul>
+    </div>` : ""}
+  `;
+
+  const modal = document.getElementById("hw-modal");
+  modal.setAttribute("aria-hidden", "false");
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeHwModal() {
+  const modal = document.getElementById("hw-modal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
 }
 
 // ---------- INIT ----------
@@ -277,6 +349,11 @@ document.addEventListener("DOMContentLoaded", () => {
   renderThesis();
   renderHardware();
   bootPage("projects");
+
+  // Modal close handlers
+  document.getElementById("hw-modal-close").addEventListener("click", closeHwModal);
+  document.getElementById("hw-modal-backdrop").addEventListener("click", closeHwModal);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeHwModal(); });
 
   setTimeout(() => {
     if (location.hash) {

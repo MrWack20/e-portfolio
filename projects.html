@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles/tokens.css">
-<link rel="stylesheet" href="styles/projects.css?v=8">
+<link rel="stylesheet" href="styles/projects.css?v=9">
 <link rel="stylesheet" href="styles/ost.css">
 </head>
 <body>
@@ -48,11 +48,21 @@
       <h2 class="section-title display">Things that plug in.</h2>
     </div>
     <div class="hw-grid reveal" id="hw-grid"></div>
-    <p class="hw-note reveal">These projects are in the process of being documented. Check back soon for circuit diagrams, code, and build photos.</p>
   </section>
 </main>
 
 <footer class="foot" id="foot"></footer>
+
+<!-- HW DETAIL MODAL -->
+<div class="hw-modal" id="hw-modal" aria-hidden="true">
+  <div class="hw-modal-backdrop" id="hw-modal-backdrop"></div>
+  <div class="hw-modal-panel" role="dialog" aria-modal="true" aria-labelledby="hm-title-label">
+    <button class="hw-modal-close" id="hw-modal-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="hw-modal-body" id="hw-modal-body"></div>
+  </div>
+</div>
 
 <script src="data/portfolio.js"></script>
 <script src="scripts/shared.js"></script>
