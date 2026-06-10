@@ -20,14 +20,26 @@ function videoEmbed(id, title) {
   `;
 }
 
+// On touch devices, window.open() inside setTimeout is blocked by mobile Safari's
+// popup blocker (no longer a direct user gesture). Instead, let the native
+// anchor target="_blank" handle navigation and just run the animation.
+const isTouchDevice = () => navigator.maxTouchPoints > 0;
+
 // Pokéball demo link — animate open then open URL in new tab
 document.addEventListener("click", e => {
   const link = e.target.closest(".pokeball-link");
   if (!link) return;
-  e.preventDefault();
   const ball = link.querySelector(".pokeball");
   if (ball.classList.contains("open")) return;
   ball.classList.add("open");
+
+  if (isTouchDevice()) {
+    // Let the anchor's target="_blank" fire naturally — just reset animation
+    setTimeout(() => ball.classList.remove("open"), 1200);
+    return;
+  }
+
+  e.preventDefault();
   setTimeout(() => {
     window.open(link.href, "_blank", "noopener,noreferrer");
     setTimeout(() => ball.classList.remove("open"), 700);
@@ -38,10 +50,17 @@ document.addEventListener("click", e => {
 document.addEventListener("click", e => {
   const link = e.target.closest(".launch-link");
   if (!link) return;
-  e.preventDefault();
   const icon = link.querySelector(".launch-icon");
   if (icon.classList.contains("fired")) return;
   icon.classList.add("fired");
+
+  if (isTouchDevice()) {
+    // Let the anchor's target="_blank" fire naturally — just reset animation
+    setTimeout(() => icon.classList.remove("fired"), 1200);
+    return;
+  }
+
+  e.preventDefault();
   setTimeout(() => {
     window.open(link.href, "_blank", "noopener,noreferrer");
     setTimeout(() => icon.classList.remove("fired"), 700);
