@@ -234,10 +234,10 @@ window.PORTFOLIO = {
     {
       slug: "solar-tracker",
       title: "Solar Tracker without Arduino",
-      period: "TBD",
-      blurb: "Details coming soon.",
-      stack: [],
-      status: "Coming Soon",
+      period: "2023",
+      blurb: "Autonomous dual-axis solar tracking system built entirely from discrete logic ICs — no microcontroller, no Arduino. Four LDR sensors measure differential sunlight intensity; LM358 op-amp comparators translate the voltage differences into directional signals; an L293D H-bridge drives two MG996 servo motors to physically rotate the panel toward peak irradiance. A 555 Timer IC handles circuit timing, and the whole system runs off 18650 Li-ion cells with a TP4056 charging module — optionally recharged by the very solar panel it tracks.",
+      stack: ["LM358 Op-Amp", "L293D Motor Driver", "555 Timer IC", "LDR Sensors", "MG996 Servo Motors", "Logic Gates"],
+      status: "Completed",
       image: "assets/img/hw-solar-tracker.jpg",
     },
     {
