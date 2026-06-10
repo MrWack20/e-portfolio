@@ -103,12 +103,12 @@ story += [
 story += section("Professional Summary")
 story += [
     Paragraph(
-        "Graduating Computer Engineering student at Jose Rizal University with hands-on experience "
-        "in full-stack development, data engineering, and AI-integrated systems. Shipped multiple "
-        "production applications independently&#8212;including a collaborative AI travel planner "
-        "and a real-time card collection manager&#8212;using Next.js 16, Supabase, and Gemini AI. "
-        "Proficient integrating Claude Code into development workflows for accelerated, "
-        "production-grade delivery across the full stack.",
+        "Computer Engineering graduate from Jose Rizal University, <b>Cum Laude</b>, with hands-on "
+        "experience in full-stack development, data engineering, and AI-integrated systems. "
+        "Shipped multiple production applications independently&#8212;including a collaborative AI "
+        "travel planner and a real-time card collection manager&#8212;using Next.js 16, Supabase, and "
+        "Gemini AI. Proficient at integrating Claude Code into development workflows for accelerated, "
+        "production-grade delivery across the full stack. <b>Open to remote opportunities.</b>",
         SUMMARY
     ),
 ]
@@ -118,7 +118,8 @@ story += section("Education")
 story += [
     KeepTogether([
         org_row("Jose Rizal University", "Mandaluyong City, Philippines"),
-        Paragraph("Bachelor of Science in Computer Engineering  &#8226;  Graduating 2026", ROLE),
+        Paragraph("Bachelor of Science in Computer Engineering  &#8226;  2022 &#8211; 2026", ROLE),
+        Paragraph("Graduated <b>Cum Laude</b>", BODY),
         Paragraph(
             "<i>Thesis:</i> Design and Development of an Intelligent Robotic Assistant "
             "for Campus Information Management",
