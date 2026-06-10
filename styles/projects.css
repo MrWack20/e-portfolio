@@ -845,9 +845,9 @@
 
 .hm-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 10px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(3, 1fr); /* overridden inline per-project */
+  gap: 12px;
+  margin-bottom: 36px;
 }
 .hm-img-item {
   margin: 0;
@@ -916,6 +916,6 @@
 @media (max-width: 640px) {
   .hw-modal { padding: 12px; }
   .hw-modal-panel { padding: 28px 22px; max-height: 92vh; }
-  .hm-gallery { grid-template-columns: 1fr 1fr; }
+  .hm-gallery { grid-template-columns: 1fr 1fr !important; }
   .hm-materials { grid-template-columns: 1fr; }
 }

@@ -294,6 +294,10 @@ function openHwModal(slug) {
   const galleryImgs = h.images && h.images.length ? h.images
     : (h.image ? [{ src: h.image, caption: "" }] : []);
 
+  // Smart column count: 1→1, 2→2, 3→3, 4→2×2, 5→3+2, 6→3×2
+  const n = galleryImgs.length;
+  const cols = n <= 1 ? 1 : n === 4 ? 2 : Math.min(n, 3);
+
   body.innerHTML = `
     <div class="hm-header">
       <div class="hm-top">
@@ -304,7 +308,7 @@ function openHwModal(slug) {
     </div>
 
     ${galleryImgs.length ? `
-    <div class="hm-gallery">
+    <div class="hm-gallery" style="grid-template-columns: repeat(${cols}, 1fr);">
       ${galleryImgs.map(img => `
         <figure class="hm-img-item">
           <img src="${img.src}" alt="${img.caption || h.title}" loading="lazy" decoding="async" />
