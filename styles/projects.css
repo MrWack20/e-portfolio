@@ -548,6 +548,7 @@
   text-decoration: none;
   cursor: pointer;
   padding: 8px 0;
+  touch-action: manipulation; /* no 300ms tap delay on mobile */
 }
 
 /* Ball container — overflow:visible so top half can animate outside */
@@ -645,10 +646,24 @@
   color: var(--accent);
 }
 
-@media (max-width: 540px) {
-  .pokeball { width: 68px; height: 68px; }
-  .pokeball-top  { border-radius: 68px 68px 0 0; }
-  .pokeball-bottom { border-radius: 0 0 68px 68px; }
+/* Mobile: bigger tap targets, centred, no shrink */
+@media (max-width: 780px) {
+  .tl-demo {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+  }
+  .pokeball-link,
+  .launch-link {
+    padding: 16px 32px;
+  }
+  .pokeball {
+    width: 100px;
+    height: 100px;
+  }
+  .pokeball-top  { border-radius: 100px 100px 0 0; }
+  .pokeball-bottom { border-radius: 0 0 100px 100px; }
+  .launch-icon { width: 100px; height: 100px; }
 }
 
 /* =====================================================
@@ -662,6 +677,7 @@
   text-decoration: none;
   cursor: pointer;
   padding: 8px 0;
+  touch-action: manipulation; /* no 300ms tap delay on mobile */
 }
 
 .launch-icon {
