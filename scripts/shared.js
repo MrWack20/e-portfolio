@@ -28,6 +28,15 @@ function moonIcon() {
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>`;
 }
 
+// ---------- MOBILE DRAWER ----------
+function closeNavDrawer() {
+  const d = document.getElementById("nav-drawer");
+  const h = document.getElementById("nav-hamburger");
+  if (d) { d.classList.remove("open"); d.setAttribute("aria-hidden", "true"); }
+  if (h) h.setAttribute("aria-expanded", "false");
+  document.body.style.overflow = "";
+}
+
 // ---------- NAV + FOOTER RENDER ----------
 function renderChrome(activePage) {
   const p = window.PORTFOLIO;
@@ -56,8 +65,74 @@ function renderChrome(activePage) {
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
           <span data-theme-icon>${theme === "dark" ? sunIcon() : moonIcon()}</span>
         </button>
+        <button class="nav-hamburger" id="nav-hamburger"
+                aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+          </svg>
+        </button>
       </div>
     `;
+
+    // ---- Mobile drawer — appended to body to avoid backdrop-filter z-index clipping ----
+    let drawerEl = document.getElementById("nav-drawer");
+    if (!drawerEl) {
+      drawerEl = document.createElement("div");
+      document.body.appendChild(drawerEl);
+    }
+    drawerEl.id = "nav-drawer";
+    drawerEl.className = "nav-drawer";
+    drawerEl.setAttribute("role", "dialog");
+    drawerEl.setAttribute("aria-modal", "true");
+    drawerEl.setAttribute("aria-label", "Navigation menu");
+    drawerEl.setAttribute("aria-hidden", "true");
+    drawerEl.innerHTML = `
+      <div class="nav-drawer-backdrop" id="nav-drawer-backdrop"></div>
+      <div class="nav-drawer-panel">
+        <div class="nav-drawer-head">
+          <a class="nav-brand" href="index.html">
+            <span class="nav-brand-dot"></span>
+            <span>${p.shortName}</span>
+          </a>
+          <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" width="18" height="18">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <nav class="nav-drawer-links">
+          ${pages.map(pg => `
+            <a class="nav-drawer-link ${pg.key === activePage ? "active" : ""}" href="${pg.href}">
+              <span>${pg.label}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" width="16" height="16" aria-hidden="true">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </a>
+          `).join("")}
+        </nav>
+        <div class="nav-drawer-footer">
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <span data-theme-icon>${theme === "dark" ? sunIcon() : moonIcon()}</span>
+          </button>
+          <span class="nav-drawer-theme-label">Toggle theme</span>
+        </div>
+      </div>
+    `;
+
+    // Wire events
+    document.getElementById("nav-hamburger").addEventListener("click", () => {
+      drawerEl.classList.add("open");
+      drawerEl.setAttribute("aria-hidden", "false");
+      document.getElementById("nav-hamburger").setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+      document.getElementById("nav-drawer-close").focus();
+    });
+    document.getElementById("nav-drawer-close").addEventListener("click", closeNavDrawer);
+    document.getElementById("nav-drawer-backdrop").addEventListener("click", closeNavDrawer);
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeNavDrawer(); });
   }
 
   // Footer
