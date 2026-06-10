@@ -296,6 +296,13 @@ function renderMusicPlayer() {
   loadTrack(idx, false);
 }
 
+// ---------- SERVICE WORKER ----------
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+
 // ---------- BOOT ----------
 function bootPage(activePage) {
   renderBackdrop();
