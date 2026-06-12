@@ -156,6 +156,23 @@ window.PORTFOLIO = {
 
   projects: [
     {
+      slug: "wackai",
+      title: "WackAI — Offline Local-First AI Assistant & Coding Agent",
+      period: "June 2026",
+      blurb: "A fully offline personal AI assistant and Claude-Code-style coding agent that runs entirely on my own hardware through Ollama — no cloud, no accounts, no cost. Built solo in Python across 13 iterative releases.",
+      highlight: "Self-built local alternative to Claude Code — 100% offline, ~6,600 LOC, packaged as a Windows app.",
+      role: "Sole developer",
+      stack: ["Python", "PySide6 / Qt", "Ollama", "Local LLMs", "RAG", "Agentic AI", "PyInstaller"],
+      bullets: [
+        "Built a native desktop AI app (PySide6 + Ollama) with streaming chat, model picker, editable persona, and conversation history — plus a multi-provider system that routes 'Provider::model' references across local Ollama over LAN, OpenAI-compatible, and Anthropic endpoints.",
+        "Engineered an agentic coding loop rivaling Claude Code: text-protocol file read/write, diff-based search/replace edits with a three-tier fuzzy matcher and self-healing retry loop, and permission-gated terminal command execution (hard denylist, timeout, run off the UI thread).",
+        "Implemented automatic RAG over the active workspace (nomic-embed-text embeddings, pure-Python cosine search) alongside persistent memory, projects, and chat summaries — all fed through a token-budgeted context manager that never drops the system persona.",
+        "Added offline voice in/out (Vosk + Windows SAPI), camera and screenshot vision input, internet access (DuckDuckGo search + cited page reader), background chat execution, and an automatic prompt queue.",
+        "Shipped a phone PWA: a PIN-protected LAN dispatch server streams live partial replies to an installable mobile page, with free push notifications via ntfy.sh when a job finishes.",
+        "Packaged for real distribution — PyInstaller Windows .exe + Inno Setup installer, crash logging, automatic pre-overwrite file backups, settings export/import, and optional Windows auto-start — all covered by a pytest suite.",
+      ],
+    },
+    {
       slug: "pokemon-binder",
       title: "Pokémon TCG Online Binder Manager",
       period: "December 2025",
