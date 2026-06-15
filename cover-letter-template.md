@@ -61,17 +61,18 @@ matches the role, and send the matching résumé variant.
 > Most recently I solo-built and deployed **VoyageAI**, a production collaborative-travel
 > SaaS, end-to-end with Next.js 16, React 19, TypeScript, and Supabase (PostGIS, RLS,
 > Realtime) — including a grounded AI assistant and a three-layer access-control model,
-> all on free-tier infrastructure. Earlier I led backend development for THRIVE, an
-> inclusive job-application app (a PLDT InnoGen Giga 25 finalist). I'm confident across
-> the stack — REST APIs, relational and realtime databases, and modern React — and ready
-> to ship for [COMPANY] from day one.
+> all on free-tier infrastructure. I also built **WackAI**, a fully offline AI coding agent
+> in Python (~11,600 lines, 81 tests), and earlier led backend development for THRIVE, a
+> PLDT InnoGen Giga 25 finalist. I'm confident across the stack — REST APIs, relational and
+> realtime databases, and modern React — and ready to ship for [COMPANY] from day one.
 
 ### → AI / LLM Application roles
 > For my thesis I built a **RAG pipeline on a multi-LLM architecture** so a campus robot
 > could answer questions from an uploaded knowledge base, plus an emotion-detection model
-> I trained from a self-gathered dataset. I've since shipped VoyageAI, whose AI assistant
-> makes grounded tool calls into live trip data using the Vercel AI SDK and never invents
-> results. I'd love to bring that practical, ship-it approach to LLM features at [COMPANY].
+> I trained from a self-gathered dataset. I've since shipped **VoyageAI**, whose AI assistant
+> makes grounded tool calls into live trip data, and **WackAI**, an offline local-first coding
+> agent with RAG, a SQLite knowledge graph, and a multi-agent panel. I'd love to bring that
+> practical, ship-it approach to LLM features at [COMPANY].
 
 ---
 
