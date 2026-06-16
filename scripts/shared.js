@@ -386,6 +386,6 @@ function bootPage(activePage) {
   requestAnimationFrame(() => {
     initReveal();
     initCounters();
-    renderMusicPlayer();
+    // renderMusicPlayer(); // OST player hidden for now — uncomment to re-enable
   });
 }
