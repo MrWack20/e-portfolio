@@ -160,7 +160,7 @@ window.PORTFOLIO = {
       title: "WackAI — Offline Local-First AI Assistant & Coding Agent",
       period: "June 2026",
       blurb: "A fully offline, local-first personal AI system that runs entirely on my own hardware through Ollama — no cloud, no accounts, no cost. Part Claude-Code-style coding agent, part multimodal assistant, part autonomous operator — built solo in Python across 29 iterative releases (~11,600 lines, 81 tests).",
-      highlight: "Self-built local alternative to Claude Code — 100% offline, ~11,600 LOC across 29 releases, packaged as a Windows app.",
+      highlight: "Self-built, 100% offline alternative to Claude Code.",
       role: "Sole developer",
       stack: ["Python", "PySide6 / Qt", "Ollama", "Local LLMs", "RAG", "Knowledge Graph", "Multi-Agent AI", "PyInstaller"],
       bullets: [

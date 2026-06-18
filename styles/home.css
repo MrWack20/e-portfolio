@@ -242,7 +242,7 @@
   text-transform: uppercase;
   position: relative;
 }
-.proj-info { position: relative; }
+.proj-info { position: relative; min-width: 0; }
 .proj-title { font-family: var(--font-display); font-weight: 500; font-size: 20px; line-height: 1.15; margin: 0 0 4px; letter-spacing: -0.01em; }
 .proj-blurb { color: var(--ink-soft); font-size: 13px; max-width: 520px; }
 .proj-highlight {
@@ -254,7 +254,9 @@
   border: 1px solid var(--line);
   border-radius: 6px;
   color: var(--accent);
-  white-space: nowrap;
+  max-width: 240px;
+  line-height: 1.4;
+  text-align: center;
 }
 .proj-arrow {
   position: relative;
