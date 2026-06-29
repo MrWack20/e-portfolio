@@ -229,10 +229,11 @@ function renderThesis() {
     </div>` : ""}
 
     <div class="thesis-detail">
+      ${t.advisors && t.advisors !== "To be filled" ? `
       <div>
         <div class="tl-block-label">Advisors</div>
         <div class="thesis-advisors">${t.advisors}</div>
-      </div>
+      </div>` : ""}
       <div>
         <div class="tl-block-label">Topic areas</div>
         <div class="tl-stack">${t.topics.map(x => `<span>${x}</span>`).join("")}</div>
@@ -268,7 +269,9 @@ function renderThesis() {
 function renderHardware() {
   const el = document.getElementById("hw-grid");
   if (!el) return;
-  el.innerHTML = PORTFOLIO.hardwareProjects.map(h => {
+  // Only show hardware projects with real details (hide "Coming Soon" placeholders)
+  const shown = PORTFOLIO.hardwareProjects.filter(h => h.status !== "Coming Soon");
+  el.innerHTML = shown.map(h => {
     const hasDetail = (h.images && h.images.length) || (h.materials && h.materials.length);
     return `
     <div class="hw-card ${h.image ? 'has-img' : ''}">
