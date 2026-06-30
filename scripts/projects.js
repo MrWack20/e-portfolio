@@ -153,6 +153,7 @@ function renderTimeline() {
       <div class="tl-card ${p.video ? 'has-video' : ''}">
 
         <div class="tl-content">
+          ${p.cover ? `<div class="tl-cover"><img src="${p.cover}" alt="${p.title}" loading="lazy" decoding="async" onerror="this.closest('.tl-cover').style.display='none'" /></div>` : ""}
           <div class="tl-meta">
             <span>${p.period}</span>
             <span class="pill">${p.role}</span>
