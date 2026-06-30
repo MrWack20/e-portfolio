@@ -135,6 +135,21 @@
   border: 1px solid var(--line);
   color: var(--ink-soft);
 }
+.tl-source {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  text-transform: none;
+  letter-spacing: 0.08em;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.tl-source:hover { color: var(--accent); border-color: var(--accent); background: var(--bg-inset); }
+.tl-source svg { flex-shrink: 0; }
 
 .tl-title {
   font-family: var(--font-display);

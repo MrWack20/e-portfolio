@@ -157,6 +157,7 @@ window.PORTFOLIO = {
   projects: [
     {
       slug: "wackai",
+      repo: "https://github.com/MrWack20/WackAI",
       title: "WackAI — Offline Local-First AI Assistant & Coding Agent",
       period: "June 2026",
       blurb: "A fully offline, local-first personal AI system that runs entirely on my own hardware through Ollama — no cloud, no accounts, no cost. Part Claude-Code-style coding agent, part multimodal assistant, part autonomous operator — built solo in Python across 29 iterative releases (~11,600 lines, 81 tests).",
@@ -176,6 +177,7 @@ window.PORTFOLIO = {
     },
     {
       slug: "pokemon-binder",
+      repo: "https://github.com/MrWack20/pokemon-binder",
       title: "Pokémon TCG Online Binder Manager",
       period: "December 2025",
       blurb: "A full-stack card collection manager with real-time sync, drag-and-drop binders, and a ruthlessly optimized API — built end-to-end with Claude Code.",
@@ -211,6 +213,7 @@ window.PORTFOLIO = {
     },
     {
       slug: "voyageai",
+      repo: "https://github.com/MrWack20/voyageai",
       title: "VoyageAI — Collaborative AI Travel Planner",
       period: "May 2026",
       blurb: "Solo-built production SaaS for collaborative group travel — vote on places, AI-optimize itineraries against weather and fairness, and chat with an assistant that works from your trip's actual data. Zero paid services.",
