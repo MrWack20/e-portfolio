@@ -164,6 +164,7 @@ function renderTimeline() {
           <h2 class="tl-title">${p.title}</h2>
           <p class="tl-blurb">${p.blurb}</p>
           <div class="tl-highlight">${p.highlight}</div>
+          ${galleryHtml(p)}
           <div class="tl-detail">
             <div>
               <div class="tl-block-label">What I did</div>
@@ -372,6 +373,48 @@ function closeHwModal() {
   document.body.style.overflow = "";
 }
 
+// ---------- SCREENSHOT GALLERY + LIGHTBOX ----------
+// Renders a click-to-zoom gallery from p.screenshots (array of image paths).
+// Empty/missing = nothing renders. Broken images remove themselves; an empty
+// gallery removes its own heading too.
+function galleryHtml(p) {
+  if (!p.screenshots || !p.screenshots.length) return "";
+  return `
+    <div class="tl-gallery">
+      <div class="tl-block-label">— Screenshots</div>
+      <div class="tl-shots">
+        ${p.screenshots.map((s, i) => `
+          <figure class="tl-shot">
+            <img src="${s}" alt="${p.title} — screenshot ${i + 1}" loading="lazy" decoding="async"
+                 onerror="(function(im){var g=im.closest('.tl-gallery');im.closest('.tl-shot').remove();if(g&&!g.querySelector('.tl-shot'))g.remove();})(this)" />
+          </figure>`).join("")}
+      </div>
+    </div>`;
+}
+
+function openLightbox(src, alt) {
+  const lb = document.getElementById("img-lightbox");
+  if (!lb) return;
+  const img = lb.querySelector("img");
+  img.src = src;
+  img.alt = alt || "";
+  lb.classList.add("open");
+  lb.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+function closeLightbox() {
+  const lb = document.getElementById("img-lightbox");
+  if (!lb) return;
+  lb.classList.remove("open");
+  lb.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+// Open the lightbox when a screenshot is clicked (delegated)
+document.addEventListener("click", e => {
+  const shot = e.target.closest(".tl-shot img");
+  if (shot) openLightbox(shot.src, shot.alt);
+});
+
 // ---------- INIT ----------
 document.addEventListener("DOMContentLoaded", () => {
   renderFilters();
@@ -384,6 +427,13 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("hw-modal-close").addEventListener("click", closeHwModal);
   document.getElementById("hw-modal-backdrop").addEventListener("click", closeHwModal);
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeHwModal(); });
+
+  // Lightbox close handlers (click backdrop / close button / Escape)
+  const lb = document.getElementById("img-lightbox");
+  if (lb) lb.addEventListener("click", e => {
+    if (e.target === lb || e.target.closest(".img-lightbox-close")) closeLightbox();
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
 
   setTimeout(() => {
     if (location.hash) {
