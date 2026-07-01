@@ -20,53 +20,6 @@ function videoEmbed(id, title) {
   `;
 }
 
-// On touch devices, window.open() inside setTimeout is blocked by mobile Safari's
-// popup blocker (no longer a direct user gesture). Instead, let the native
-// anchor target="_blank" handle navigation and just run the animation.
-const isTouchDevice = () => navigator.maxTouchPoints > 0;
-
-// Pokéball demo link — animate open then open URL in new tab
-document.addEventListener("click", e => {
-  const link = e.target.closest(".pokeball-link");
-  if (!link) return;
-  const ball = link.querySelector(".pokeball");
-  if (ball.classList.contains("open")) return;
-  ball.classList.add("open");
-
-  if (isTouchDevice()) {
-    // Let the anchor's target="_blank" fire naturally — just reset animation
-    setTimeout(() => ball.classList.remove("open"), 1200);
-    return;
-  }
-
-  e.preventDefault();
-  setTimeout(() => {
-    window.open(link.href, "_blank", "noopener,noreferrer");
-    setTimeout(() => ball.classList.remove("open"), 700);
-  }, 500);
-});
-
-// Launch (paper plane) demo link — fire then open URL in new tab
-document.addEventListener("click", e => {
-  const link = e.target.closest(".launch-link");
-  if (!link) return;
-  const icon = link.querySelector(".launch-icon");
-  if (icon.classList.contains("fired")) return;
-  icon.classList.add("fired");
-
-  if (isTouchDevice()) {
-    // Let the anchor's target="_blank" fire naturally — just reset animation
-    setTimeout(() => icon.classList.remove("fired"), 1200);
-    return;
-  }
-
-  e.preventDefault();
-  setTimeout(() => {
-    window.open(link.href, "_blank", "noopener,noreferrer");
-    setTimeout(() => icon.classList.remove("fired"), 700);
-  }, 450);
-});
-
 // Single delegated listener — swaps poster for live iframe on click
 document.addEventListener("click", e => {
   const wrap = e.target.closest(".video-wrap[data-vid]");
@@ -84,32 +37,14 @@ document.addEventListener("click", e => {
   wrap.classList.add("playing");
 });
 
-// ---------- DEMO BUTTONS ----------
+// ---------- DEMO BUTTON (rocket pill — one tap, mobile-friendly) ----------
 function renderDemoButton(p) {
-  if (p.demoStyle === "launch") {
-    return `
-              <div class="tl-demo">
-                <a class="launch-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
-                  <div class="launch-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="28" height="28">
-                      <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
-                    </svg>
-                  </div>
-                  <span class="launch-label">Launch VoyageAI ↗</span>
-                </a>
-              </div>`;
-  }
-  // default: pokeball
   return `
               <div class="tl-demo">
-                <a class="pokeball-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
-                  <div class="pokeball">
-                    <div class="pokeball-top"></div>
-                    <div class="pokeball-bottom"></div>
-                    <div class="pokeball-band"></div>
-                    <div class="pokeball-btn-circle"></div>
-                  </div>
-                  <span class="pokeball-label">Click the Pokéball to visit the website</span>
+                <a class="tl-rocket" href="${p.demo}" target="_blank" rel="noopener noreferrer">
+                  <span class="tl-rocket-ship" aria-hidden="true">🚀</span>
+                  <span>${p.demoLabel || "Visit live site"}</span>
+                  <span class="tl-rocket-arrow" aria-hidden="true">↗</span>
                 </a>
               </div>`;
 }

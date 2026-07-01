@@ -227,6 +227,7 @@ window.PORTFOLIO = {
       stack: ["React", "Supabase", "Firebase Storage", "Pokémon TCG API", "Claude Code"],
       demo: "https://pokemon-binder-gamma.vercel.app/",
       demoStyle: "pokeball",
+      demoLabel: "Launch Poké Binder",
       bullets: [
         "Organized and managed collections with 1000+ card capacity per digital binder.",
         "Integrated Pokémon TCG REST API with filtering (set, type, rarity, language) and pagination across 10,000+ cards.",
@@ -266,6 +267,7 @@ window.PORTFOLIO = {
       stack: ["Next.js 16", "React 19", "TypeScript", "Supabase", "Tailwind v4", "Vercel AI SDK", "Gemini AI", "MapLibre", "Claude Code"],
       demo: "https://voyageai-one.vercel.app/",
       demoStyle: "launch",
+      demoLabel: "Launch VoyageAI",
       bullets: [
         "Solo-built collaborative travel SaaS — trips, wishlists with per-user priority voting, day-by-day itinerary board, group budget splitting, live map, and AI assistant. All realtime.",
         "AI optimization engine: DBSCAN proximity clustering → nearest-neighbor TSP per day → four-axis scoring (satisfaction, fairness via Jain's index, efficiency, weather-fit) → human-reviewable diff applied transactionally.",
