@@ -63,6 +63,11 @@ window.PORTFOLIO = {
     ],
   },
 
+  // ---------- EXPERIENCE ----------
+  // Optional `logo` per entry shows the company/competition logo in a 46px tile.
+  // Drop official logos in assets/img/ then add e.g. logo: "assets/img/logo-itgroup.png".
+  // Suggested names: logo-itgroup · logo-pldt-innogen · logo-byteforward · logo-aws ·
+  //   logo-aap · logo-picapica  (.png — transparent, or a version that reads on white).
   experience: [
     {
       org: "IT Group Inc.",

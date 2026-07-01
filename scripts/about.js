@@ -11,10 +11,13 @@ function renderExperience() {
     <div class="exp-item reveal ${i === 0 ? 'open' : ''}" data-idx="${i}">
       <div class="exp-head">
         <div class="exp-period">${e.period}</div>
-        <div>
-          <h3 class="exp-title">${e.role}</h3>
-          <div class="exp-org">${e.org} · ${e.location}</div>
-          ${e.badge ? `<span class="exp-badge">${e.badge}</span>` : ""}
+        <div class="exp-headline">
+          ${e.logo ? `<div class="exp-logo"><img src="${e.logo}" alt="${e.org} logo" loading="lazy" decoding="async" onerror="this.closest('.exp-logo').remove()" /></div>` : ""}
+          <div class="exp-headline-text">
+            <h3 class="exp-title">${e.role}</h3>
+            <div class="exp-org">${e.org} · ${e.location}</div>
+            ${e.badge ? `<span class="exp-badge">${e.badge}</span>` : ""}
+          </div>
         </div>
         <button class="exp-toggle" aria-label="Toggle details">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
