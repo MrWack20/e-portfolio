@@ -184,6 +184,7 @@ window.PORTFOLIO = {
     },
     {
       slug: "quotation-system",
+      repo: "https://github.com/MrWack20/Symmetry_Glass_Quotation_System",
       cover: "assets/img/cover-quotation.jpg",
       screenshots: [],
       title: "Glass & Aluminum Quotation System",
