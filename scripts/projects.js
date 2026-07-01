@@ -20,51 +20,6 @@ function videoEmbed(id, title) {
   `;
 }
 
-// On touch devices, window.open() inside setTimeout is blocked by mobile Safari's
-// popup blocker (no longer a direct user gesture). Instead, let the native
-// anchor target="_blank" handle navigation and just run the animation.
-const isTouchDevice = () => navigator.maxTouchPoints > 0;
-
-// Pokéball demo link — animate open then open URL in new tab
-document.addEventListener("click", e => {
-  const link = e.target.closest(".pokeball-link");
-  if (!link) return;
-  const ball = link.querySelector(".pokeball");
-  if (ball.classList.contains("open")) return;
-  ball.classList.add("open");
-
-  if (isTouchDevice()) {
-    setTimeout(() => ball.classList.remove("open"), 1200);
-    return;
-  }
-
-  e.preventDefault();
-  setTimeout(() => {
-    window.open(link.href, "_blank", "noopener,noreferrer");
-    setTimeout(() => ball.classList.remove("open"), 700);
-  }, 500);
-});
-
-// Launch (paper plane) demo link — fire then open URL in new tab
-document.addEventListener("click", e => {
-  const link = e.target.closest(".launch-link");
-  if (!link) return;
-  const icon = link.querySelector(".launch-icon");
-  if (icon.classList.contains("fired")) return;
-  icon.classList.add("fired");
-
-  if (isTouchDevice()) {
-    setTimeout(() => icon.classList.remove("fired"), 1200);
-    return;
-  }
-
-  e.preventDefault();
-  setTimeout(() => {
-    window.open(link.href, "_blank", "noopener,noreferrer");
-    setTimeout(() => icon.classList.remove("fired"), 700);
-  }, 450);
-});
-
 // Single delegated listener — swaps poster for live iframe on click
 document.addEventListener("click", e => {
   const wrap = e.target.closest(".video-wrap[data-vid]");
@@ -82,32 +37,18 @@ document.addEventListener("click", e => {
   wrap.classList.add("playing");
 });
 
-// ---------- DEMO BUTTONS (themed: pokéball / paper-plane launch) ----------
+// ---------- DEMO BUTTON (tappable pill · themed icon per project) ----------
 function renderDemoButton(p) {
-  if (p.demoStyle === "launch") {
-    return `
-              <div class="tl-demo">
-                <a class="launch-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
-                  <div class="launch-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="28" height="28">
-                      <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
-                    </svg>
-                  </div>
-                  <span class="launch-label">${p.demoLabel || "Launch site"} ↗</span>
-                </a>
-              </div>`;
-  }
-  // default: pokeball
+  const isLaunch = p.demoStyle === "launch";
+  const icon = isLaunch
+    ? '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>'
+    : '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="#fff" stroke="#111" stroke-width="1.6"/><path d="M2.8 12 A9.2 9.2 0 0 1 21.2 12 Z" fill="#e63232"/><path d="M2.8 12 H21.2" stroke="#111" stroke-width="1.6"/><circle cx="12" cy="12" r="2.8" fill="#fff" stroke="#111" stroke-width="1.6"/></svg>';
   return `
               <div class="tl-demo">
-                <a class="pokeball-link" href="${p.demo}" target="_blank" rel="noopener noreferrer">
-                  <div class="pokeball">
-                    <div class="pokeball-top"></div>
-                    <div class="pokeball-bottom"></div>
-                    <div class="pokeball-band"></div>
-                    <div class="pokeball-btn-circle"></div>
-                  </div>
-                  <span class="pokeball-label">${p.demoLabel || "Tap the Pokéball to visit the site"}</span>
+                <a class="tl-demo-btn ${isLaunch ? 'is-launch' : 'is-pokeball'}" href="${p.demo}" target="_blank" rel="noopener noreferrer">
+                  <span class="tl-demo-icon">${icon}</span>
+                  <span>${p.demoLabel || "Visit live site"}</span>
+                  <span class="tl-demo-arrow" aria-hidden="true">↗</span>
                 </a>
               </div>`;
 }

@@ -654,6 +654,42 @@
   margin-top: 20px;
 }
 
+/* Tappable demo pill with a themed icon (pokéball / paper-plane) */
+.tl-demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 12%, var(--bg-inset));
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  min-height: 44px;
+  touch-action: manipulation;
+  transition: box-shadow 0.3s var(--ease-out), transform 0.3s, background 0.3s;
+}
+.tl-demo-btn:hover {
+  box-shadow: 0 0 24px var(--accent-glow);
+  transform: translateY(-2px);
+  background: color-mix(in oklab, var(--accent) 22%, var(--bg-inset));
+}
+.tl-demo-icon {
+  display: inline-flex;
+  animation: demo-bob 2.6s ease-in-out infinite;
+  transition: transform 0.45s var(--ease-out);
+}
+.tl-demo-icon svg { display: block; }
+@keyframes demo-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+/* paper plane flies up-and-away on hover */
+.tl-demo-btn.is-launch:hover .tl-demo-icon { animation: none; transform: translate(6px, -6px) rotate(-8deg); }
+/* pokéball gives a little wobble-pop on hover */
+.tl-demo-btn.is-pokeball:hover .tl-demo-icon { animation: none; transform: rotate(-12deg) scale(1.18); }
+.tl-demo-arrow { opacity: 0.7; transition: transform 0.3s var(--ease-out), opacity 0.3s; }
+.tl-demo-btn:hover .tl-demo-arrow { transform: translate(3px, -3px); opacity: 1; }
+
 .pokeball-link {
   display: flex;
   flex-direction: column;
