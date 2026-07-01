@@ -170,7 +170,10 @@ function renderTimeline() {
             <span class="pill">${p.role}</span>
             ${sourceLinks(p)}
           </div>
-          <h2 class="tl-title">${p.title}</h2>
+          <div class="tl-titlerow">
+            ${p.logo ? `<span class="tl-logo"><img src="${p.logo}" alt="${p.title} logo" loading="lazy" decoding="async" onerror="this.closest('.tl-logo').remove()" /></span>` : ""}
+            <h2 class="tl-title">${p.title}</h2>
+          </div>
           <p class="tl-blurb">${p.blurb}</p>
           <div class="tl-highlight">${p.highlight}</div>
           ${galleryHtml(p)}

@@ -71,6 +71,7 @@ window.PORTFOLIO = {
   experience: [
     {
       org: "IT Group Inc.",
+      logo: "assets/img/logo-itgroup.png",
       role: "Student Intern",
       period: "Feb 2026 — Apr 2026",
       location: "On-site",
@@ -89,6 +90,7 @@ window.PORTFOLIO = {
     },
     {
       org: "PLDT-Smart InnoGen Pitch Competition",
+      logo: "assets/img/logo-pldt-innogen.png",
       role: "Participant — Giga 25 Finalist",
       period: "Nov 2024 — Sep 2025",
       location: "Philippines",
@@ -104,6 +106,7 @@ window.PORTFOLIO = {
     },
     {
       org: "Byte Forward Hackathon 2025",
+      logo: "assets/img/logo-byteforward.png",
       role: "Participant",
       period: "Aug 2025",
       location: "Philippines",
@@ -117,6 +120,8 @@ window.PORTFOLIO = {
     },
     {
       org: "AWS Learning Clubs — JRU Chapter",
+      logo: "assets/img/logo-aws.png",
+      link: { label: "Visit our Facebook Page", url: "https://www.facebook.com/AWSSBG.JRU" },
       role: "The Secretariat (Co-founding Executive)",
       period: "Mar 2025 — Present",
       location: "Jose Rizal University",
@@ -130,6 +135,7 @@ window.PORTFOLIO = {
     },
     {
       org: "Analytics & AI Association of the Philippines",
+      logo: "assets/img/logo-aap.png",
       role: "Data Engineer Intern",
       period: "Feb 2025 — Jan 2026",
       location: "Philippines",
@@ -143,6 +149,7 @@ window.PORTFOLIO = {
     },
     {
       org: "J's Pica-Pica atbp.",
+      logo: "assets/img/logo-picapica.png",
       role: "Co-founder — Finance, Systems & Packaging",
       period: "2023 — Present",
       location: "Online · Philippines",
@@ -232,6 +239,7 @@ window.PORTFOLIO = {
     },
     {
       slug: "thrive",
+      logo: "assets/img/logo-thrive.png",
       title: "THRIVE — Mobile Job Platform for PWDs",
       period: "June 2025",
       blurb: "An inclusive Android job application platform designed with and for persons with disabilities.",

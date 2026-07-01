@@ -32,6 +32,11 @@ function renderExperience() {
           <div class="exp-tags">
             ${e.tags.map(t => `<span>${t}</span>`).join("")}
           </div>
+          ${e.link ? `<a class="exp-rocket" href="${e.link.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+            <span class="exp-rocket-ship" aria-hidden="true">🚀</span>
+            <span>${e.link.label}</span>
+            <span class="exp-rocket-arrow" aria-hidden="true">↗</span>
+          </a>` : ""}
         </div>
       </div>
     </div>
