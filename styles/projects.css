@@ -654,41 +654,6 @@
   margin-top: 20px;
 }
 
-/* Rocket demo pill — one tap, mobile-friendly */
-.tl-rocket {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 22px;
-  border-radius: 10px;
-  border: 1px solid var(--accent);
-  background: color-mix(in oklab, var(--accent) 12%, var(--bg-inset));
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  min-height: 44px;
-  touch-action: manipulation;
-  transition: box-shadow 0.3s var(--ease-out), transform 0.3s, background 0.3s;
-}
-.tl-rocket:hover {
-  box-shadow: 0 0 24px var(--accent-glow);
-  transform: translateY(-2px);
-  background: color-mix(in oklab, var(--accent) 22%, var(--bg-inset));
-}
-.tl-rocket-ship {
-  display: inline-block;
-  animation: rocket-bob 2.4s ease-in-out infinite;
-  transition: transform 0.45s var(--ease-out);
-}
-.tl-rocket:hover .tl-rocket-ship {
-  animation: none;
-  transform: translate(8px, -8px) rotate(12deg) scale(1.15);
-}
-@keyframes rocket-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-.tl-rocket-arrow { opacity: 0.7; transition: transform 0.3s var(--ease-out), opacity 0.3s; }
-.tl-rocket:hover .tl-rocket-arrow { transform: translate(3px, -3px); opacity: 1; }
-
 .pokeball-link {
   display: flex;
   flex-direction: column;
