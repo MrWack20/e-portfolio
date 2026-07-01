@@ -136,6 +136,7 @@
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
   color: var(--ink-mute);
   font-family: var(--font-mono);
   font-size: 10px;
@@ -150,8 +151,13 @@
   border: 1px solid var(--line);
   color: var(--ink-soft);
 }
-.tl-source {
+.tl-sources {
   margin-left: auto;
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tl-source {
   display: inline-flex;
   align-items: center;
   gap: 5px;

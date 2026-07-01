@@ -114,6 +114,17 @@ function renderDemoButton(p) {
               </div>`;
 }
 
+// ---------- SOURCE LINK(S) ----------
+// Supports a single p.repo (URL string) or a labeled p.repos array [{label, url}].
+function sourceLinks(p) {
+  const list = (p.repos && p.repos.length)
+    ? p.repos
+    : (p.repo ? [{ label: "Source", url: p.repo }] : []);
+  if (!list.length) return "";
+  const gh = '<svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>';
+  return `<span class="tl-sources">${list.map(r => `<a class="tl-source" href="${r.url}" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">${gh} ${r.label}</a>`).join("")}</span>`;
+}
+
 // ---------- FILTERS ----------
 function allTags() {
   const set = new Set(["All"]);
@@ -157,9 +168,7 @@ function renderTimeline() {
           <div class="tl-meta">
             <span>${p.period}</span>
             <span class="pill">${p.role}</span>
-            ${p.repo ? `<a class="tl-source" href="${p.repo}" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">
-              <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-              Source</a>` : ""}
+            ${sourceLinks(p)}
           </div>
           <h2 class="tl-title">${p.title}</h2>
           <p class="tl-blurb">${p.blurb}</p>
