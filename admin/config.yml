@@ -1,0 +1,234 @@
+backend:
+  name: github
+  repo: MrWack20/e-portfolio
+  branch: master
+  base_url: https://e-portfolio-two-eta.vercel.app
+  auth_endpoint: /api/auth
+
+# Images are saved here and referenced by this path in the content
+media_folder: "assets/img"
+public_folder: "assets/img"
+
+collections:
+  - name: content
+    label: "Portfolio Content"
+    delete: false
+    files:
+      - name: portfolio
+        label: "All Site Content"
+        file: "data/portfolio.json"
+        editor:
+          preview: false
+        fields:
+          # ---------- PROFILE ----------
+          - { name: name, label: "Full name", widget: string }
+          - { name: shortName, label: "Short name (nav brand)", widget: string }
+          - { name: tagline, label: "Tagline", widget: string }
+          - { name: subtagline, label: "Sub-tagline", widget: string }
+          - { name: bio, label: "Bio (About page)", widget: text }
+          - { name: location, label: "Location", widget: string }
+          - { name: email, label: "Email", widget: string }
+          - { name: phone, label: "Phone", widget: string }
+          - { name: portrait, label: "Portrait photo", widget: image, required: false }
+          - { name: resume, label: "Résumé (PDF)", widget: file, required: false }
+
+          # ---------- SOCIAL LINKS ----------
+          - name: socials
+            label: "Social links"
+            label_singular: "Social link"
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { name: label, label: "Label", widget: string }
+              - { name: href, label: "URL", widget: string }
+              - { name: handle, label: "Handle", widget: string, required: false }
+
+          # ---------- HOME STATS ----------
+          - name: stats
+            label: "Home stats"
+            label_singular: "Stat"
+            widget: list
+            summary: "{{fields.value}} — {{fields.label}}"
+            fields:
+              - { name: value, label: "Number", widget: number, value_type: int }
+              - { name: suffix, label: "Suffix (e.g. +, K+, %)", widget: string, required: false }
+              - { name: label, label: "Label", widget: string }
+
+          # ---------- EDUCATION ----------
+          - name: education
+            label: "Education"
+            label_singular: "School"
+            widget: list
+            summary: "{{fields.school}}"
+            fields:
+              - { name: school, label: "School", widget: string }
+              - { name: location, label: "Location", widget: string }
+              - { name: degree, label: "Degree", widget: string }
+              - { name: period, label: "Period", widget: string }
+              - { name: note, label: "Note", widget: text, required: false }
+
+          # ---------- THESIS ----------
+          - name: thesis
+            label: "Thesis"
+            widget: object
+            fields:
+              - { name: title, label: "Title", widget: string }
+              - { name: period, label: "Period", widget: string }
+              - { name: status, label: "Status", widget: string }
+              - { name: advisors, label: "Advisors", widget: string, required: false }
+              - { name: blurb, label: "Blurb", widget: text }
+              - { name: topics, label: "Topic areas", widget: list, required: false }
+              - name: members
+                label: "Team members"
+                widget: object
+                required: false
+                fields:
+                  - { name: software, label: "Software team", widget: list, required: false }
+                  - { name: hardware, label: "Hardware team", widget: list, required: false }
+              - { name: myContributions, label: "My contributions", widget: list, required: false }
+              - { name: teamPhoto, label: "Team photo", widget: image, required: false }
+              - name: videos
+                label: "Videos"
+                widget: list
+                required: false
+                fields:
+                  - { name: label, label: "Label", widget: string }
+                  - { name: id, label: "YouTube video ID", widget: string }
+
+          # ---------- EXPERIENCE ----------
+          - name: experience
+            label: "Experience"
+            label_singular: "Experience entry"
+            widget: list
+            summary: "{{fields.org}} — {{fields.role}}"
+            fields:
+              - { name: org, label: "Organization", widget: string }
+              - { name: logo, label: "Logo", widget: image, required: false }
+              - name: link
+                label: "External link (optional)"
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { name: label, label: "Link label", widget: string, required: false }
+                  - { name: url, label: "Link URL", widget: string, required: false }
+              - { name: role, label: "Role / title", widget: string }
+              - { name: period, label: "Period", widget: string }
+              - { name: location, label: "Location", widget: string }
+              - { name: badge, label: "Badge (optional)", widget: string, required: false }
+              - { name: summary, label: "Summary", widget: text }
+              - { name: bullets, label: "Bullet points", widget: list }
+              - { name: tags, label: "Tags", widget: list }
+
+          # ---------- PROJECTS ----------
+          - name: projects
+            label: "Projects"
+            label_singular: "Project"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: slug, label: "Slug (unique URL id — no spaces)", widget: string }
+              - { name: title, label: "Title", widget: string }
+              - { name: period, label: "Period", widget: string }
+              - { name: role, label: "Role", widget: string }
+              - { name: blurb, label: "Blurb", widget: text }
+              - { name: highlight, label: "Highlight (metric line)", widget: string }
+              - { name: cover, label: "Cover image", widget: image, required: false }
+              - { name: logo, label: "Logo (optional)", widget: image, required: false }
+              - name: screenshots
+                label: "Screenshots"
+                widget: list
+                required: false
+                field: { name: image, label: "Image", widget: image }
+              - { name: stack, label: "Tech stack", widget: list }
+              - { name: bullets, label: "Bullet points", widget: list }
+              - { name: repo, label: "GitHub repo URL (single)", widget: string, required: false }
+              - name: repos
+                label: "GitHub repos (multiple, labeled)"
+                widget: list
+                required: false
+                summary: "{{fields.label}}"
+                fields:
+                  - { name: label, label: "Label", widget: string }
+                  - { name: url, label: "URL", widget: string }
+              - { name: demo, label: "Live demo URL", widget: string, required: false }
+              - { name: demoStyle, label: "Demo button style", widget: select, options: ["pokeball", "launch"], required: false }
+              - { name: demoLabel, label: "Demo button label", widget: string, required: false }
+              - { name: video, label: "YouTube video ID (optional)", widget: string, required: false }
+
+          # ---------- HARDWARE PROJECTS ----------
+          - name: hardwareProjects
+            label: "Hardware projects"
+            label_singular: "Hardware project"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: slug, label: "Slug (unique id)", widget: string }
+              - { name: title, label: "Title", widget: string }
+              - { name: period, label: "Period", widget: string }
+              - { name: status, label: "Status", widget: string }
+              - { name: blurb, label: "Blurb", widget: text }
+              - { name: image, label: "Cover image", widget: image, required: false }
+              - { name: stack, label: "Stack", widget: list, required: false }
+              - name: images
+                label: "Gallery images"
+                widget: list
+                required: false
+                summary: "{{fields.caption}}"
+                fields:
+                  - { name: src, label: "Image", widget: image }
+                  - { name: caption, label: "Caption", widget: string, required: false }
+              - { name: materials, label: "Materials", widget: list, required: false }
+
+          # ---------- SKILLS ----------
+          - name: skillGroups
+            label: "Skill groups"
+            label_singular: "Skill group"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: "Group name", widget: string }
+              - name: items
+                label: "Skills"
+                label_singular: "Skill"
+                widget: list
+                summary: "{{fields.label}} — {{fields.level}}%"
+                fields:
+                  - { name: label, label: "Skill", widget: string }
+                  - { name: level, label: "Level (0-100)", widget: number, value_type: int, min: 0, max: 100 }
+
+          # ---------- CERTIFICATIONS ----------
+          - name: certifications
+            label: "Certifications"
+            label_singular: "Certification"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: "Name", widget: string }
+              - { name: issuer, label: "Issuer", widget: string }
+              - { name: year, label: "Year", widget: string }
+              - { name: badge, label: "Badge image", widget: image, required: false }
+
+          # ---------- INTERESTS ----------
+          - { name: interests, label: "Interests", widget: list }
+
+          # ---------- PERSONAL FACTS ----------
+          - name: personalFacts
+            label: "Personal facts"
+            label_singular: "Fact"
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { name: label, label: "Label", widget: string }
+              - { name: value, label: "Value", widget: string }
+
+          # ---------- MUSIC (OST player) ----------
+          - name: music
+            label: "Music (OST player)"
+            label_singular: "Track"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: "Track title", widget: string }
+              - { name: game, label: "Source / game", widget: string }
+              - { name: src, label: "MP3 file", widget: file, required: false }
