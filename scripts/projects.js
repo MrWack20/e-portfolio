@@ -367,7 +367,8 @@ document.addEventListener("click", e => {
 });
 
 // ---------- INIT ----------
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await window.PORTFOLIO_READY;
   renderFilters();
   renderTimeline();
   renderThesis();

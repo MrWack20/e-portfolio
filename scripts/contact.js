@@ -42,7 +42,8 @@ function submitForm(ev) {
   return false;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await window.PORTFOLIO_READY;
   renderContactInfo();
   bootPage("contact");
 });

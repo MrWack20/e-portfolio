@@ -42,7 +42,8 @@ function startClock() {
   setInterval(tick, 30000);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await window.PORTFOLIO_READY;
   renderStats();
   renderSelected();
   startClock();

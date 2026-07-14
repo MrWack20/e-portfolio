@@ -133,7 +133,8 @@ function renderInterests() {
   `;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await window.PORTFOLIO_READY;
   renderLede();
   renderExperience();
   renderSkills();
